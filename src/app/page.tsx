@@ -1,10 +1,10 @@
-import Image from "next/image";
+import HeroSection from "@/components/ui/HeroSection";
 
 export default function Home() {
   return (
     <main>
-      <section className="min-h-screen px-[5vw] flex flex-col items-center justify-center">
-        <h1>Dariov sajt</h1>
+      <section className="min-h-screen pt-[20vh] pb-10 px-[5vw] flex flex-col">
+        <HeroSection />
       </section>
     </main>
   );
