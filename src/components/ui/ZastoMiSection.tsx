@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react";
+import { Leaf, FlaskConical, HandHeart, Recycle } from "lucide-react";
 
 const imageDirections = [
     { x: -60, y: -60 },
@@ -65,6 +66,31 @@ export default function ZastoMiSection() {
                 </div>
 
             </div>
+
+            {/* Benefit kartice */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+                {[
+                    { icon: Leaf, title: "100% prirodno", desc: "Bez veštačkih aroma i konzervansa" },
+                    { icon: FlaskConical, title: "Bez hemije", desc: "Samo provereni prirodni sastojci" },
+                    { icon: HandHeart, title: "Ručna izrada", desc: "Svaki komad pravimo sa pažnjom" },
+                    { icon: Recycle, title: "Eko ambalaža", desc: "Pakovanje koje brine o planeti" },
+                ].map((benefit, i) => (
+                    <motion.div
+                        key={i}
+                        className="flex flex-col items-center text-center gap-3 p-6 rounded-2xl bg-foreground text-background"
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.03 }}
+                    >
+                        <benefit.icon size={32} />
+                        <strong className="text-lg">{benefit.title}</strong>
+                        <p className="text-sm text-background/75">{benefit.desc}</p>
+                    </motion.div>
+                ))}
+            </div>
+
         </section>
     )
 }
