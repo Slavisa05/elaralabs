@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
-import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/ui/Footer";
 import "./globals.css";
+import { CartProvider } from "@/context/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +35,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}  
-        <Footer />
+        <CartProvider>    
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
