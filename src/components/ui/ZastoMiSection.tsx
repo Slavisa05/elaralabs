@@ -19,7 +19,7 @@ const reasons = [
 
 export default function ZastoMiSection() {
     return(
-        <section>
+        <section id="zasto-mi">
             <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-10">
 
                 {/* Slike — svaka ulazi iz svog ugla */}

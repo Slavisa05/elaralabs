@@ -67,6 +67,7 @@ export default function ProizvodSection() {
 
     return (
         <motion.section
+            id="proizvod"
             className={`rounded-2xl overflow-hidden transition-colors duration-500 ${current.bg}`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}

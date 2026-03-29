@@ -10,7 +10,7 @@ const fieldVariants = {
 
 export default function ContactSection() {
     return(
-        <section className="py-10">
+        <section id="kontakt" className="py-10">
             <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {/* Levi tekst — slide s leva */}
