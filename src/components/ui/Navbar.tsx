@@ -27,7 +27,7 @@ export default function Navbar() {
     ];
 
     return (
-        <header className={`w-full backdrop-blur-3xl fixed px-[5vw] py-6 transition-transform duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}>
+        <header className={`z-1000 w-full backdrop-blur-3xl fixed px-[5vw] py-6 transition-transform duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}>
             <nav className="w-full flex items-center justify-between">
                 <Link href="/" className="uppercase italic text-3xl">LOGO</Link>
 

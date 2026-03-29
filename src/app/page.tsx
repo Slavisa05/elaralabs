@@ -1,11 +1,19 @@
 import HeroSection from "@/components/ui/HeroSection";
+import ProizvodSection from "@/components/ui/ProizvodSection";
+import ZastoMiSection from "@/components/ui/ZastoMiSection";
+import TestimonialSection from "@/components/ui/TestimonialSection";
+import ContactSection from "@/components/ui/ContactSection";
+import CTA from "@/components/ui/CTA";
 
 export default function Home() {
   return (
-    <main>
-      <section className="min-h-screen pt-[20vh] pb-10 px-[5vw] flex flex-col">
+    <main className="px-[5vw] flex flex-col gap-10">
         <HeroSection />
-      </section>
+        <ProizvodSection />
+        <ZastoMiSection />
+        <TestimonialSection />
+        <ContactSection />
+        <CTA />
     </main>
   );
 }

@@ -15,49 +15,58 @@ const imageVariants = {
 
 export default function HeroSection() {
     return (
-        <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex flex-col items-center justify-center gap-4">
-                <motion.h1
-                    className="max-w-[90%] md:max-w-[80%] text-center md:text-start"
-                    variants={textVariants}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
-                >
-                    Lorem ipsum dolor sit amet
-                </motion.h1>
+        <section className="min-h-screen pt-[20vh] pb-10 flex flex-col">
 
-                <motion.p
-                    className="max-w-[90%] md:max-w-[80%] text-center md:text-start"
-                    variants={textVariants}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-                >
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur
-                </motion.p>
+            <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col items-center justify-center gap-4">
+                    <motion.h1
+                        className="max-w-[90%] md:max-w-[80%] text-center md:text-start"
+                        variants={textVariants}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
+                    >
+                        Prirodno. Ukusno. Naše.
+                    </motion.h1>
+
+                    <motion.p
+                        className="max-w-[90%] md:max-w-[80%] text-center md:text-start"
+                        variants={textVariants}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+                    >
+                        Otkrijte 5 unikatnih ukusa napravljenih od prirodnih sastojaka, bez veštačkih aroma i konzervansa. Svaki zalogaj — priča za sebe.
+                    </motion.p>
+
+                    <motion.div
+                        className="w-[90%] md:w-[80%] flex items-center justify-center gap-4"
+                        variants={textVariants}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                    >
+                        <Button text="naruci odmah" />
+                        <Button text="pogledaj detaljnije" variant="secondary" />
+                    </motion.div>
+                </div>
 
                 <motion.div
-                    className="w-[90%] md:w-[80%] flex items-center gap-4"
-                    variants={textVariants}
+                    className="flex items-center justify-center"
+                    variants={imageVariants}
                     initial="hidden"
                     animate="visible"
-                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                    transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
                 >
-                    <Button text="naruci odmah" />
-                    <Button text="pogledaj detaljnije" variant="secondary" />
+                
+                    < motion.img transition={{ duration: 0.6, ease: "easeOut"}}
+                                whileHover={{ scale: 1.04, zIndex: 10 }} 
+                                className="rounded-xl" 
+                                src="https://placehold.co/600x400" 
+                                alt="placeholder slika" 
+                    />
                 </motion.div>
             </div>
-
-            <motion.div
-                className="flex items-center justify-center"
-                variants={imageVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-            >
-                <img className="rounded-xl" src="https://placehold.co/600x400" alt="placeholder slika" />
-            </motion.div>
-        </div>
+        </section>
     );
 }
