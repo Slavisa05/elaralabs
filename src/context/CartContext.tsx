@@ -3,6 +3,8 @@
 import { createContext, useContext, useReducer, useEffect } from 'react'
 import type { CartState, CartAction, ProductVariant, CartItem } from '@/types/cart'
 
+const MAX_ITEMS = 50
+
 // =====================
 // 1. REDUCER
 // =====================
@@ -10,6 +12,14 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
 
     case 'ADD_ITEM': {
+      const ukupnoLabela = state.items.reduce(
+        (sum, item) => sum + item.quantity, 0
+      )
+
+      if (ukupnoLabela >= MAX_ITEMS) {
+        return state // ne dodaj više, vrati isti state
+      }
+
       // Provjeri da li varijacija već postoji u korpi
       const existing = state.items.find(
         item => item.variant.id === action.payload.id
@@ -48,6 +58,10 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       }
     }
 
+    case 'HYDRATE_CART': {
+      return { items: action.payload }
+    }
+
     case 'CLEAR_CART': {
       return { items: [] }
     }
@@ -83,7 +97,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem('cart')
     if (saved) {
       const parsed: CartItem[] = JSON.parse(saved)
-      parsed.forEach(item => dispatch({ type: 'ADD_ITEM', payload: item.variant }))
+      dispatch({ type: 'HYDRATE_CART', payload: parsed })
     }
   }, [])
 

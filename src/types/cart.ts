@@ -22,4 +22,5 @@ export type CartAction =
   | { type: 'ADD_ITEM'; payload: ProductVariant }
   | { type: 'REMOVE_ITEM'; payload: string }        // payload = variant.id
   | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
+  | { type: 'HYDRATE_CART'; payload: CartItem[] }
   | { type: 'CLEAR_CART' }

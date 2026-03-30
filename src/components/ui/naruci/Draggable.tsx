@@ -1,7 +1,6 @@
 'use client'
 
 import { useDraggable } from '@dnd-kit/core'
-import { CSS } from '@dnd-kit/utilities'
 
 interface DraggableProps {
   id: string
@@ -10,21 +9,17 @@ interface DraggableProps {
 }
 
 export default function Draggable({ id, imageUrl, alt }: DraggableProps) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({ id })
-
-  const style = {
-    transform: CSS.Translate.toString(transform),
-  }
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({ id })
 
   return (
     <div
       ref={setNodeRef}
-      style={style}
       {...listeners}
       {...attributes}
-      className="cursor-grab active:cursor-grabbing z-50"
+      className="relative cursor-grab active:cursor-grabbing"
+      style={{ opacity: isDragging ? 0.3 : 1, touchAction: 'none' }}
     >
-      <img src={imageUrl} alt={alt} className="w-48 h-48 object-cover rounded-xl" />
+      <img src={imageUrl} alt={alt} className="w-24 h-24 md:w-48 md:h-48 object-cover rounded-xl" />
     </div>
   )
 }
