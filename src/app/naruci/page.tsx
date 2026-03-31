@@ -19,11 +19,11 @@ interface FlyingItem {
 }
 
 const proizvodi = [
-  { id: 'proizvod-1', name: 'Varijacija 1', price: 100, image: 'labelo1.webp' },
-  { id: 'proizvod-2', name: 'Varijacija 2', price: 100, image: 'labelo2.webp' },
-  { id: 'proizvod-3', name: 'Varijacija 3', price: 100, image: 'labelo3.webp' },
-  { id: 'proizvod-4', name: 'Varijacija 4', price: 100, image: 'labelo4.webp' },
-  { id: 'proizvod-5', name: 'Varijacija 5', price: 100, image: 'labelo5.webp' },
+  { id: 'proizvod-1', name: 'Malina', price: 100, image: 'labelo1.webp' },
+  { id: 'proizvod-2', name: 'Vanila', price: 100, image: 'labelo2.webp' },
+  { id: 'proizvod-3', name: 'Čokolada', price: 100, image: 'labelo3.webp' },
+  { id: 'proizvod-4', name: 'Jagoda', price: 100, image: 'labelo4.webp' },
+  { id: 'proizvod-5', name: 'Pistać', price: 100, image: 'labelo5.webp' },
 ]
 
 export default function Naruci() {

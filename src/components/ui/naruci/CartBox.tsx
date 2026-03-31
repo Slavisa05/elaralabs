@@ -4,8 +4,11 @@ import { useDroppable } from '@dnd-kit/core'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/hooks/useCart'
 import { AnimationPhase } from '@/hooks/useCartAnimation'
+import { useState } from 'react'
 import HeartParticle from './HeartParticle'
 import Button from '../Button'
+import Modal from '../Modal'
+import { Minus, Plus, Trash2 } from 'lucide-react'
 
 // Predefinisane rotacije za stack efekat
 const rotacije = [-6, 4, -3, 7, -5]
@@ -26,8 +29,11 @@ interface CartBoxProps {
 }
 
 export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) {
+  // modal za pregled korpe
+  const [isPregledOpen, setIsPregledOpen ] = useState(false)
+
   const { setNodeRef, isOver } = useDroppable({ id: 'korpa' })
-  const { items, totalPrice } = useCart()
+  const { items, totalPrice, updateQuantity, removeItem } = useCart()
 
   // Ova funkcija se poziva iz page.tsx kada se nešto dropuje
   // Koristimo useImperativeHandle ili jednostavno ref callback
@@ -213,12 +219,54 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
               Ukupno: {totalPrice} RSD
             </p>
 
-            <Button text='pogledaj korpu' variant='secondary' />
+            <Button text='pogledaj korpu' variant='secondary' onClick={() => setIsPregledOpen(true)} />
             <Button text='naruci' />
           </motion.div>
         )}
       </AnimatePresence>
 
+      <Modal isOpen={isPregledOpen} title="Detalji korpe" onClose={() => setIsPregledOpen(false)}>
+        <ul className="flex flex-col gap-3 max-h-[55vh] overflow-y-auto">
+          {items.map(item => (
+            <li key={item.variant.id} className="flex items-center gap-3">
+              <img
+                src={item.variant.image}
+                alt={item.variant.name}
+                className="w-14 h-14 rounded-xl object-cover shrink-0"
+              />
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-sm leading-tight">Labelo {item.variant.name}</p>
+                <p className="text-xs opacity-50 mt-0.5">{item.variant.price} RSD / kom</p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  onClick={() =>
+                    item.quantity === 1
+                      ? removeItem(item.variant.id)
+                      : updateQuantity(item.variant.id, item.quantity - 1)
+                  }
+                  className="w-7 h-7 rounded-full bg-foreground/10 hover:bg-red-100 flex items-center justify-center transition-colors"
+                >
+                  {item.quantity === 1
+                    ? <Trash2 size={13} className="text-red-500" />
+                    : <Minus size={13} />}
+                </button>
+                <span className="text-sm font-bold w-5 text-center">{item.quantity}</span>
+                <button
+                  onClick={() => updateQuantity(item.variant.id, item.quantity + 1)}
+                  className="w-7 h-7 rounded-full bg-foreground/10 hover:bg-foreground/20 flex items-center justify-center transition-colors"
+                >
+                  <Plus size={13} />
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-4 pt-4 border-t border-foreground/10 flex justify-between items-center">
+          <span className="font-semibold text-sm">Ukupno</span>
+          <span className="font-bold text-lg">{totalPrice} RSD</span>
+        </div>
+      </Modal>
     </div>
   )
 }

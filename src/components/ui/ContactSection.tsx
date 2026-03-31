@@ -33,9 +33,9 @@ export default function ContactSection() {
                 >
                     <form className="flex flex-col gap-5">
                         {[
-                            { label: "Ime i prezime", name: "name", type: "text", placeholder: "Pera Perić", tag: "input" },
-                            { label: "Broj telefona", name: "phoneNumber", type: "text", placeholder: "+38164...", tag: "input" },
-                            { label: "Poruka", name: "message", type: "text", placeholder: "Zdravo, zanima me...", tag: "textarea" },
+                            { label: "Ime i prezime", name: "name", type: "text", placeholder: "Pera Perić", tag: "input", autocomplete: "name" },
+                            { label: "Broj telefona", name: "phoneNumber", type: "tel", placeholder: "+38164...", tag: "input", autocomplete: "tel" },
+                            { label: "Poruka", name: "message", type: "text", placeholder: "Zdravo, zanima me...", tag: "textarea", autocomplete: "off" },
                         ].map((field, i) => (
                             <motion.div
                                 key={field.name}
@@ -43,19 +43,23 @@ export default function ContactSection() {
                                 variants={fieldVariants}
                                 transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.15 }}
                             >
-                                <label>{field.label}</label>
+                                <label htmlFor={field.name}>{field.label}</label>
                                 {field.tag === "textarea" ? (
                                     <textarea
+                                        id={field.name}
                                         className="h-40 px-3 py-2 rounded-xl border-none outline-none bg-foreground text-background resize-none"
                                         name={field.name}
                                         placeholder={field.placeholder}
+                                        autoComplete={field.autocomplete}
                                     />
                                 ) : (
                                     <input
+                                        id={field.name}
                                         className="px-3 py-2 rounded-xl border-none outline-none bg-foreground text-background"
                                         type={field.type}
                                         name={field.name}
                                         placeholder={field.placeholder}
+                                        autoComplete={field.autocomplete}
                                     />
                                 )}
                             </motion.div>

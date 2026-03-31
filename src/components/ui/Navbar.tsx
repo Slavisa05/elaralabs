@@ -39,7 +39,7 @@ export default function Navbar() {
                             <span className="absolute bottom-0 left-0 h-0.5 w-full bg-current scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
                         </Link>
                     ))}
-                    <Link href="/" className="ml-2 uppercase px-4 py-2 rounded-xl bg-foreground text-background hover:opacity-80 transition-opacity">
+                    <Link href="/naruci" className="ml-2 uppercase px-4 py-2 rounded-xl bg-foreground text-background hover:opacity-80 transition-opacity">
                         Naruči
                     </Link>
                 </div>
@@ -72,7 +72,7 @@ export default function Navbar() {
                         </Link>
                     ))}
                     <Link
-                        href="/"
+                        href="/naruci"
                         className="uppercase px-4 py-2 rounded-xl bg-foreground text-background text-center hover:opacity-80 transition-opacity"
                         onClick={() => setMenuOpen(false)}
                     >
