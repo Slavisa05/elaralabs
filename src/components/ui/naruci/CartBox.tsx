@@ -21,9 +21,11 @@ const srca = [
 
 interface CartBoxProps {
   phase: AnimationPhase
+  lidRef?: React.RefObject<HTMLDivElement | null>
+  enteringImage?: string
 }
 
-export default function CartBox({ phase }: CartBoxProps) {
+export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) {
   const { setNodeRef, isOver } = useDroppable({ id: 'korpa' })
   const { items, totalPrice } = useCart()
 
@@ -50,6 +52,14 @@ export default function CartBox({ phase }: CartBoxProps) {
     rows.push(flatItems.slice(i, i + N_COLS))
   }
 
+  const N_COLS_MOBILE = 3
+  const MAX_ROWS_MOBILE = 4
+  const rowsMobile: typeof flatItems[] = []
+  for (let i = 0; i < flatItems.length; i += N_COLS_MOBILE) {
+    rowsMobile.push(flatItems.slice(i, i + N_COLS_MOBILE))
+  }
+  const visibleRowsMobile = rowsMobile.slice(0, MAX_ROWS_MOBILE)
+
   return (
     <div className="flex flex-col h-full gap-4">
 
@@ -67,6 +77,7 @@ export default function CartBox({ phase }: CartBoxProps) {
 
           {/* POKLOPAC */}
           <motion.div
+            ref={lidRef}
             className={`
               relative z-10 w-full h-8 rounded-t-xl flex items-center justify-center
               transition-colors duration-200
@@ -115,30 +126,53 @@ export default function CartBox({ phase }: CartBoxProps) {
 
             {/* GRID PAKOVANJE — redovi odozdo nagore */}
             {rows.length > 0 && (
-              <div className="absolute bottom-2 left-4 right-2 flex flex-col-reverse gap-1">
-                {rows.map((row, rowIndex) => (
-                  <div key={rowIndex} className="flex flex-row gap-1">
-                    {row.map(item => (
-                      <motion.img
-                        key={item.key}
-                        src={item.image}
-                        alt={item.name}
-                        className="w-14 h-14 rounded-md object-cover shadow-sm shrink-0"
-                        initial={{ opacity: 0, scale: 0.3, y: -20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ duration: 0.3, ease: 'backOut' }}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </div>
+              <>
+                {/* DESKTOP: 10 kolona */}
+                <div className="hidden md:flex absolute bottom-2 left-4 right-2 flex-col-reverse gap-1">
+                  {rows.map((row, rowIndex) => (
+                    <div key={rowIndex} className="flex flex-row gap-1">
+                      {row.map(item => (
+                        <motion.img
+                          key={item.key}
+                          src={item.image}
+                          alt={item.name}
+                          className="w-14 h-14 rounded-md object-cover shadow-sm shrink-0"
+                          initial={{ opacity: 0, scale: 0.3, y: -20 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          transition={{ duration: 0.3, ease: 'backOut' }}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+
+                {/* MOBILNI: 3 kolone, max 5 redova */}
+                <div className="md:hidden absolute bottom-2 left-2 right-2 flex flex-col-reverse gap-1 overflow-hidden">
+                  {visibleRowsMobile.map((row, rowIndex) => (
+                    <div key={rowIndex} className="flex flex-row gap-1">
+                      {row.map(item => (
+                        <motion.img
+                          key={item.key}
+                          src={item.image}
+                          alt={item.name}
+                          className="w-15 h-15 shrink-0 rounded-md object-cover shadow-sm"
+                          initial={{ opacity: 0, scale: 0.3, y: -20 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          transition={{ duration: 0.3, ease: 'backOut' }}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
 
             {/* Item koji "ulazi" animacija */}
             <AnimatePresence>
               {phase === 'item-enter' && (
                 <motion.div
-                  className="absolute w-16 h-16 bg-amber-300 rounded-lg z-50"
+                  className="absolute w-16 h-16 rounded-lg z-50 bg-amber-300 bg-cover bg-center"
+                  style={enteringImage ? { backgroundImage: `url(${enteringImage})` } : undefined}
                   initial={{ opacity: 1, y: -60, scale: 0.8 }}
                   animate={{ opacity: 0, y: 20, scale: 0.3 }}
                   exit={{ opacity: 0 }}

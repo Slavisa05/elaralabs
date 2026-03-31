@@ -3,11 +3,20 @@
 import { useState, useRef } from 'react'
 import { DndContext, DragEndEvent, DragStartEvent, DragOverlay } from '@dnd-kit/core'
 import { ArrowLeft } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/hooks/useCart'
 import { useCartAnimation } from '@/hooks/useCartAnimation'
 import Link from 'next/link'
 import Draggable from '@/components/ui/naruci/Draggable'
 import CartBox from '@/components/ui/naruci/CartBox'
+
+interface FlyingItem {
+  image: string
+  fromX: number
+  fromY: number
+  toX: number
+  toY: number
+}
 
 const proizvodi = [
   { id: 'proizvod-1', name: 'Varijacija 1', price: 100, image: 'labelo1.webp' },
@@ -21,6 +30,9 @@ export default function Naruci() {
   const { addItem } = useCart()
   const { phase, playAnimation } = useCartAnimation()
   const [activeId, setActiveId] = useState<string | null>(null)
+  const [flyingItem, setFlyingItem] = useState<FlyingItem | null>(null)
+  const [enteringImage, setEnteringImage] = useState<string | undefined>(undefined)
+  const lidRef = useRef<HTMLDivElement>(null)
 
   const activeProizvod = proizvodi.find(p => p.id === activeId)
 
@@ -34,20 +46,33 @@ export default function Naruci() {
 
     if (over?.id === 'korpa') {
       const proizvod = proizvodi.find(p => p.id === active.id)
+      if (!proizvod) return
 
-      if (proizvod) {
-        // 1. Pokreni animaciju
-        playAnimation()
+      const translated = active.rect.current?.translated
+      const lidRect = lidRef.current?.getBoundingClientRect()
 
-        // 2. Dodaj u korpu malo kasnije (kada poklopac bude otvoren)
-        await wait(400)
-        addItem({
-          id: proizvod.id,
-          name: proizvod.name,
-          price: proizvod.price,
+      setEnteringImage(proizvod.image)
+
+      if (translated && lidRect) {
+        setFlyingItem({
           image: proizvod.image,
+          fromX: translated.left + translated.width / 2,
+          fromY: translated.top + translated.height / 2,
+          toX: lidRect.left + lidRect.width / 2,
+          toY: lidRect.top + lidRect.height / 2,
         })
+        // animacija leti ~500ms, zatim pokrenemo box animaciju
+        await wait(500)
       }
+
+      playAnimation()
+      await wait(400)
+      addItem({
+        id: proizvod.id,
+        name: proizvod.name,
+        price: proizvod.price,
+        image: proizvod.image,
+      })
     }
   }
 
@@ -58,12 +83,39 @@ export default function Naruci() {
         <strong className="uppercase">nazad na početnu</strong>
       </Link>
 
+      {/* Leteći thumbnail */}
+      <AnimatePresence>
+        {flyingItem && (
+          <motion.img
+            key="flying"
+            src={flyingItem.image}
+            alt=""
+            className="fixed w-20 h-20 object-cover rounded-xl pointer-events-none z-50"
+            style={{
+              top: flyingItem.fromY,
+              left: flyingItem.fromX,
+              translateX: '-50%',
+              translateY: '-50%',
+            }}
+            initial={{ x: 0, y: 0, scale: 1, opacity: 1 }}
+            animate={{
+              x: flyingItem.toX - flyingItem.fromX,
+              y: flyingItem.toY - flyingItem.fromY,
+              scale: 0.1,
+              opacity: 0,
+            }}
+            transition={{ duration: 0.5, ease: [0.4, 0, 1, 1] }}
+            onAnimationComplete={() => setFlyingItem(null)}
+          />
+        )}
+      </AnimatePresence>
+
       <DndContext id='naruci-dnd' onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <section>
-          <div className="grid grid-cols-[2fr_1fr] gap-8 pt-8 md:p-8">
+          <div className="grid grid-cols-[2fr_1fr] md:grid-cols-2 gap-8 pt-8 md:p-8">
 
             {/* LEVO — Kutija/Korpa */}
-            <CartBox phase={phase} />
+            <CartBox phase={phase} lidRef={lidRef} enteringImage={enteringImage} />
 
             {/* DESNO — Proizvodi */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto">
