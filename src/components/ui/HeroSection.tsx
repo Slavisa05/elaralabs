@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 const textVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -46,8 +47,13 @@ export default function HeroSection() {
                         animate="visible"
                         transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
                     >
-                        <Button text="naruci odmah" />
-                        <Button text="pogledaj detaljnije" variant="secondary" />
+                        <Link href="naruci/">
+                            <Button text="naruci odmah" />
+                        </Link>
+
+                        <Link href="#proizvod">
+                            <Button text="pogledaj detaljnije" variant="secondary" />
+                        </Link>
                     </motion.div>
                 </div>
 

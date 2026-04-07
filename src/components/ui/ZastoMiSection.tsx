@@ -2,13 +2,8 @@
 
 import { motion } from "motion/react";
 import { Leaf, FlaskConical, HandHeart, Recycle } from "lucide-react";
+import Image from "next/image";
 
-const imageDirections = [
-    { x: -60, y: -60 },
-    { x:  60, y: -60 },
-    { x: -60, y:  60 },
-    { x:  60, y:  60 },
-];
 
 const reasons = [
     "Koristimo isključivo prirodne sastojke bez veštačkih aroma, boja ili konzervansa — jer vaše zdravlje nam je na prvom mestu.",
@@ -19,24 +14,23 @@ const reasons = [
 
 export default function ZastoMiSection() {
     return(
-        <section id="zasto-mi">
+        <section id="zasto-mi" className="py-15 flex flex-col gap-10">
             <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-10">
 
-                {/* Slike — svaka ulazi iz svog ugla */}
-                <div className="grid grid-cols-2 gap-2">
-                    {imageDirections.map((dir, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, x: dir.x, y: dir.y }}
-                            whileInView={{ opacity: 1, x: 0, y: 0 }}
-                            transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.1 }}
-                            viewport={{ once: true }}
-                            whileHover={{ scale: 1.04, zIndex: 10 }}
-                            className="relative"
-                        >
-                            <img className="rounded-xl w-full h-full object-cover" src="https://placehold.co/400" alt="placeholder slika" />
-                        </motion.div>
-                    ))}
+                <div>
+                    <motion.div
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.04, zIndex: 10 }}
+                        className="relative"
+                    >
+                        <Image 
+                            src='/wa-img.jpeg'
+                            alt='3 proizvoda'
+                            width={600}
+                            height={600}
+                        />
+                    </motion.div>
                 </div>
 
                 {/* Tekst */}

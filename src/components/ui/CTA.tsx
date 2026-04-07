@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Button from "./Button";
+import Link from "next/link";
 
 export default function CTA() {
     return (
@@ -51,8 +52,13 @@ export default function CTA() {
                     transition={{ duration: 0.55, ease: "easeOut", delay: 0.42 }}
                     viewport={{ once: true }}
                 >
-                    <Button text="Naruči odmah" />
-                    <Button text="Pogledaj ukuse" />
+                    <Link href="naruci/">
+                        <Button text="Naruči odmah" />
+                    </Link>
+
+                    <Link href="#proizvod">
+                        <Button text="Pogledaj ukuse" />
+                    </Link>
                 </motion.div>
             </div>
         </motion.section>

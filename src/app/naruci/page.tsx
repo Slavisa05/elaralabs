@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/hooks/useCart'
 import { useCartAnimation } from '@/hooks/useCartAnimation'
+import { getProducts } from '@/lib/queries/products'
 import Link from 'next/link'
 import Draggable from '@/components/ui/naruci/Draggable'
 import CartBox from '@/components/ui/naruci/CartBox'
@@ -18,13 +19,8 @@ interface FlyingItem {
   toY: number
 }
 
-const proizvodi = [
-  { id: 'proizvod-1', name: 'Malina', price: 100, image: 'labelo1.webp' },
-  { id: 'proizvod-2', name: 'Vanila', price: 100, image: 'labelo2.webp' },
-  { id: 'proizvod-3', name: 'Čokolada', price: 100, image: 'labelo3.webp' },
-  { id: 'proizvod-4', name: 'Jagoda', price: 100, image: 'labelo4.webp' },
-  { id: 'proizvod-5', name: 'Pistać', price: 100, image: 'labelo5.webp' },
-]
+const proizvodi = await getProducts()
+
 
 export default function Naruci() {
   const { addItem } = useCart()

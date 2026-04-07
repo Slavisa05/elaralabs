@@ -1,19 +1,32 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
 import Button from "./Button";
 
 const proizvodi = [
     {
-        slug: "malina",
-        label: "Malina",
-        bg: "bg-pink-400",
-        heading: "Malina",
+        slug: "med",
+        label: "Med",
+        bg: "bg-amber-300",
+        heading: "Med",
         paragraphs: [
-            "Svježa i voćna, malina unosi živost u svaki zalogaj. Ovaj ukus nastao je od pažljivo odabranih malina sa lokalnih farmi, čiji intenzivan miris i prirodna kiselost savršeno balansiraju slatkoću.",
-            "Idealan izbor za one koji vole osvježavajuće, lagane ukuse. Bez vještačkih aroma — samo čista malina u svakom gramu.",
+            "Topao i bogat — ukus meda koji vas vraća u djetinjstvo. Svaki zalogaj donosi prirodnu slatkoću planinskog meda, pažljivo odabranog od lokalnih pčelara koji čuvaju tradiciju od generacije do generacije.",
+            "Mekan, aromatičan i neodoljivo privlačan. Savršen za one koji traže prirodnu slatkoću bez kompromisa — čist med, bez aditiva i vještačkih aroma.",
         ],
-        imageUrl: "https://placehold.co/400",
+        imageUrl: "/original.png",
+    },
+    {
+        slug: "mango",
+        label: "Mango",
+        bg: "bg-orange-300",
+        heading: "Mango",
+        paragraphs: [
+            "Egzotičan i sunčan — ukus manga koji vas odmah prenosi na tropsku plažu. Koristimo zrele, sočne mango plodove čiji intenzivan miris i prirodna slatkoća oduševljavaju već na prvom zalogaju.",
+            "Voćan, živahan i osvježavajući. Idealan za tople dane i one koji vole egzotične ukuse — bez vještačkih aroma, samo čisti mango u svakom gramu.",
+        ],
+        imageUrl: "/mango.png",
     },
     {
         slug: "vanila",
@@ -24,18 +37,18 @@ const proizvodi = [
             "Klasičan i neodoljiv — ukus vanile koji nikad ne izlazi iz mode. Koristimo pravu bourbon vanilu, čiji topli i kremasti ton pruža osećaj udobnosti i raskoši u svakom trenutku.",
             "Blag, ali kompleksan. Savršen za one koji cene jednostavnost i kvalitet sirovine iznad svega.",
         ],
-        imageUrl: "https://placehold.co/400",
+        imageUrl: "/vanilla.png",
     },
     {
-        slug: "cokolada",
-        label: "Čokolada",
-        bg: "bg-amber-700",
-        heading: "Čokolada",
+        slug: "mint",
+        label: "Mint",
+        bg: "bg-emerald-300",
+        heading: "Mint",
         paragraphs: [
-            "Za prave ljubitelje čokolade. Bogat, dubok ukus nastao od visokokvalitetnog kakaoa sa minimalnom obradom — jer prava čokolada ne treba mnogo da bi bila savršena.",
-            "Intenzivan, ali uravnotežen. Svaki zalogaj podseća na gotovo pa toplu čokoladu — gustu, tamnu i zadovoljavajuću.",
+            "Svjež i hladan — ukus mente koji budi osjetila. Prirodna menta daje intenzivan, čist i osvježavajući osjećaj koji traje dugo nakon posljednjeg zalogaja.",
+            "Savršen balans između osvježenja i slatkoće. Za one koji vole čist, mentolni ukus koji ih vraća u ravnotežu — prirodno, bez kompromisa.",
         ],
-        imageUrl: "https://placehold.co/400",
+        imageUrl: "/mint.png",
     },
     {
         slug: "jagoda",
@@ -46,18 +59,7 @@ const proizvodi = [
             "Letnji klasik u svakom zalogaju. Ukus jagode donosi sećanje na sunčane popodne i zrele crvene jagode tek ubrane iz bašte — sladak, svež i neodoljivo mirisav.",
             "Napravljen bez veštačkih boja i aroma, ovaj ukus je dokaz da priroda sama po sebi pruža dovoljno.",
         ],
-        imageUrl: "https://placehold.co/400",
-    },
-    {
-        slug: "pistac",
-        label: "Pistać",
-        bg: "bg-green-400",
-        heading: "Pistać",
-        paragraphs: [
-            "Sofisticiran i jedinstven — ukus pistaca privlači one koji traže nešto drugačije. Orašast, blago sladak i izuzetno aromatičan, ovaj ukus je hit među znalcima.",
-            "Svaki komad sadrži stvarne komadić pistaca koji daju hrskavu teksturu i autentičan ukus kakav se ne može dobiti od ekstrakta.",
-        ],
-        imageUrl: "https://placehold.co/400",
+        imageUrl: "/jagoda.png",
     },
 ];
 
@@ -136,18 +138,28 @@ export default function ProizvodSection() {
                                 ))}
 
                                 <div className="hidden md:block">
-                                    <Button text="naruci labelo" />
+                                    <Link href="naruci/">
+                                        <Button text="naruci labelo" />
+                                    </Link>
                                 </div>
                             </div>
-                            <motion.img
+                            <motion.div 
                                 transition={{ duration: 0.6, ease: "easeOut"}}
                                 whileHover={{ scale: 1.04, zIndex: 10 }}
-                                className="rounded-2xl shadow-2xl w-full md:w-80 object-cover"
-                                src={current.imageUrl}
-                                alt={current.heading}
-                            />
+                                className="rounded-2xl w-full md:w-120 object-cover"
+                                >
+                                    <Image 
+                                        src={current.imageUrl}
+                                        alt={current.heading}
+                                        width={800}
+                                        height={800}
+                                    />
+                            </motion.div>
+
                             <div className="md:hidden">
-                                <Button text="naruci labelo" />
+                                <Link href="naruci/">
+                                    <Button text="naruci labelo" />
+                                </Link>
                             </div>
                         </motion.div>
                     </AnimatePresence>
