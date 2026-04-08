@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
@@ -29,7 +30,9 @@ export default function Navbar() {
     return (
         <header className={`z-1000 w-full backdrop-blur-3xl fixed px-[5vw] py-6 transition-transform duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}>
             <nav className="w-full flex items-center justify-between">
-                <Link href="/" className="uppercase italic text-3xl">LOGO</Link>
+                <Link href="/" className="uppercase italic text-3xl">
+                    <Image src="/logo.svg" alt="Logo" width={120} height={68} priority />
+                </Link>
 
                 {/* Desktop links */}
                 <div className="hidden md:flex items-center gap-2">
@@ -39,7 +42,7 @@ export default function Navbar() {
                             <span className="absolute bottom-0 left-0 h-0.5 w-full bg-current scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
                         </Link>
                     ))}
-                    <Link href="/naruci" className="ml-2 uppercase px-4 py-2 rounded-xl bg-foreground text-background hover:opacity-80 transition-opacity">
+                    <Link href="/naruci" className="ml-2 uppercase px-8 py-2 rounded-xl bg-accent text-foreground hover:opacity-80 transition-opacity">
                         Naruči
                     </Link>
                 </div>

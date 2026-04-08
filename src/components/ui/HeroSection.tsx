@@ -16,61 +16,56 @@ const imageVariants = {
 
 export default function HeroSection() {
     return (
-        <section className="min-h-screen pt-[20vh] pb-10 flex flex-col">
+        <section
+            className="min-h-screen pt-[20vh] md:pt-[30vh] pb-10 px-[5vw] flex flex-col"
+            style={{
+                backgroundImage: "url('/planine.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+            }}
+        >
 
-            <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col items-center justify-center gap-4">
-                    <motion.h1
-                        className="max-w-[90%] md:max-w-[80%] text-center md:text-start"
-                        variants={textVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
-                    >
-                        Prirodno. Ukusno. Naše.
-                    </motion.h1>
-
-                    <motion.p
-                        className="max-w-[90%] md:max-w-[80%] text-center md:text-start"
-                        variants={textVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-                    >
-                        Otkrijte 5 unikatnih ukusa napravljenih od prirodnih sastojaka, bez veštačkih aroma i konzervansa. Svaki zalogaj — priča za sebe.
-                    </motion.p>
-
-                    <motion.div
-                        className="w-[90%] md:w-[80%] flex items-center justify-center gap-4"
-                        variants={textVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-                    >
-                        <Link href="naruci/">
-                            <Button text="naruci odmah" />
-                        </Link>
-
-                        <Link href="#proizvod">
-                            <Button text="pogledaj detaljnije" variant="secondary" />
-                        </Link>
-                    </motion.div>
-                </div>
-
-                <motion.div
-                    className="flex items-center justify-center"
-                    variants={imageVariants}
+            <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+                <motion.h1
+                    className="max-w-[90%] md:max-w-[80%] text-center md:text-start"
+                    variants={textVariants}
                     initial="hidden"
                     animate="visible"
-                    transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
                 >
-                
-                    < motion.img transition={{ duration: 0.6, ease: "easeOut"}}
-                                whileHover={{ scale: 1.04, zIndex: 10 }} 
-                                className="rounded-xl" 
-                                src="https://placehold.co/600x400" 
-                                alt="placeholder slika" 
-                    />
+                    Prirodno. Ukusno. Naše.
+                </motion.h1>
+
+                <motion.p
+                    className="max-w-[90%] md:max-w-[50%] text-center"
+                    variants={textVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
+                >
+                    Otkrijte 5 unikatnih ukusa napravljenih od prirodnih sastojaka, bez veštačkih aroma i konzervansa. Svaki zalogaj — priča za sebe.
+                </motion.p>
+
+                <motion.div
+                    className="w-[90%] md:w-[80%] flex flex-col md:flex-row items-center justify-center gap-4"
+                    variants={textVariants}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
+                >
+
+                    <Link href="naruci/">
+                        <Button text="naruci 3 proizvoda" />
+                    </Link>
+
+                    <Link href="naruci/">
+                        <Button text="naruci 5 proizvoda" />
+                    </Link>
+                    
+                    <Link href="naruci/">
+                        <Button text="naruci vise proizvoda" />
+                    </Link>
                 </motion.div>
             </div>
         </section>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
+import Image from "next/image";
 
 function InstagramIcon({ size = 16 }: { size?: number }) {
     return (
@@ -18,7 +19,9 @@ export default function Footer() {
         <footer className="w-full px-[5vw] py-20 flex flex-col gap-15">
             <div className="flex flex-col md:flex-row gap-15 justify-between">
                 <div className="flex items-center justify-center md:justify-start">
-                    <Link href="/" className="uppercase italic text-3xl">LOGO</Link>
+                    <Link href="/" className="uppercase italic text-3xl">
+                        <Image src="/logo.svg" alt="Logo" width={120} height={68} priority />
+                    </Link>
                 </div>
 
                 <div className="flex gap-10">

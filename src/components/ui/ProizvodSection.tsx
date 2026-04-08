@@ -70,7 +70,7 @@ export default function ProizvodSection() {
     return (
         <motion.section
             id="proizvod"
-            className={`rounded-2xl overflow-hidden transition-colors duration-500 ${current.bg}`}
+            className={`bg-[#8BEAF7] mx-[5vw] rounded-2xl overflow-hidden transition-colors duration-500 ${current.bg}`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -139,7 +139,7 @@ export default function ProizvodSection() {
 
                                 <div className="hidden md:block">
                                     <Link href="naruci/">
-                                        <Button text="naruci labelo" />
+                                        <Button text="naruci labelo" variant="secondary" />
                                     </Link>
                                 </div>
                             </div>
@@ -158,7 +158,7 @@ export default function ProizvodSection() {
 
                             <div className="md:hidden">
                                 <Link href="naruci/">
-                                    <Button text="naruci labelo" />
+                                    <Button text="naruci labelo" variant="secondary" />
                                 </Link>
                             </div>
                         </motion.div>

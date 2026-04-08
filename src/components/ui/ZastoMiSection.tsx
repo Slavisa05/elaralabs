@@ -14,7 +14,7 @@ const reasons = [
 
 export default function ZastoMiSection() {
     return(
-        <section id="zasto-mi" className="py-15 flex flex-col gap-10">
+        <section id="zasto-mi" className="mx-[5vw] py-15 flex flex-col gap-10">
             <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-10">
 
                 <div>
@@ -25,18 +25,19 @@ export default function ZastoMiSection() {
                         className="relative"
                     >
                         <Image 
-                            src='/wa-img.jpeg'
+                            src='/wa-img.png'
                             alt='3 proizvoda'
                             width={600}
                             height={600}
+                            className="ml-[-5vw]"
                         />
                     </motion.div>
                 </div>
 
                 {/* Tekst */}
-                <div className="flex flex-col items-center justify-center gap-6">
+                <div className="flex flex-col justify-center gap-6">
                     <motion.h2
-                        className="text-center mb-4"
+                        className="mb-4"
                         initial={{ opacity: 0, y: -30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -71,7 +72,7 @@ export default function ZastoMiSection() {
                 ].map((benefit, i) => (
                     <motion.div
                         key={i}
-                        className="flex flex-col items-center text-center gap-3 p-6 rounded-2xl bg-foreground text-background"
+                        className="flex flex-col items-center text-center gap-3 p-6 rounded-2xl bg-accent text-foreground"
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.1 }}

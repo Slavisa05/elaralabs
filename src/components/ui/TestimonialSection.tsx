@@ -23,7 +23,7 @@ export default function TestimonialSection() {
     }, [controls]);
 
     return (
-        <section id="recenzije">
+        <section id="recenzije" className="mx-[5vw]">
             <h2 className="text-center md:text-start mb-10">Pogledajte šta kažu naše mušterije o nama</h2>
 
             <div className="py-10 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">

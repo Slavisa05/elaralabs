@@ -1,23 +1,27 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import Button from "./Button";
 import Link from "next/link";
 
 export default function CTA() {
     return (
         <motion.section
-            className="relative overflow-hidden rounded-2xl mb-10 px-8 py-16 md:py-32 flex flex-col items-center justify-center text-center gap-8"
+            className="mx-[5vw] relative overflow-hidden rounded-2xl mb-10 px-8 py-16 md:py-32 flex flex-col items-center justify-center text-center gap-8"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
         >
             {/* Pozadinska slika */}
-            <img
-                src="https://placehold.co/1200x600"
+            <Image
+                src="/grupna-slika.png"
                 alt="cta pozadina"
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 90vw"
+                priority
             />
 
             {/* Tamni overlay */}
