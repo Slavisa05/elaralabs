@@ -23,8 +23,21 @@ export default function TestimonialSection() {
     }, [controls]);
 
     return (
-        <section id="recenzije" className="mx-[5vw]">
-            <h2 className="text-center md:text-start mb-10">Pogledajte šta kažu naše mušterije o nama</h2>
+        <section id="recenzije" className="mx-[5vw] py-4">
+            {/* Header */}
+            <motion.div
+                className="text-center mb-10"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+            >
+                <div className="flex items-center justify-center gap-2 text-amber-400 text-2xl mb-3">
+                    {Array.from({ length: 5 }).map((_, i) => <span key={i}>★</span>)}
+                </div>
+                <h2>5.000+ zadovoljnih kupaca</h2>
+                <p className="text-foreground/60 mt-2">Pogledajte šta kažu naše mušterije</p>
+            </motion.div>
 
             <div className="py-10 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
                 <motion.div

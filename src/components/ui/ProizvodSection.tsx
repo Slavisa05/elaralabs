@@ -7,15 +7,16 @@ import Button from "./Button";
 
 const proizvodi = [
     {
-        slug: "med",
+        slug: "original",
         label: "Med",
         bg: "bg-amber-300",
         heading: "Med",
         paragraphs: [
-            "Topao i bogat — ukus meda koji vas vraća u djetinjstvo. Svaki zalogaj donosi prirodnu slatkoću planinskog meda, pažljivo odabranog od lokalnih pčelara koji čuvaju tradiciju od generacije do generacije.",
-            "Mekan, aromatičan i neodoljivo privlačan. Savršen za one koji traže prirodnu slatkoću bez kompromisa — čist med, bez aditiva i vještačkih aroma.",
+            "Topam i bogat — ukus meda koji vas vraća u djetinjstvo. Svaki zalogaj donosi prirodnu slatkoću planinskog meda, pažljivo odabranog od lokalnih pčelara.",
+            "Mekan, aromatičan i neodoljivo privlačan. Savršen za one koji traže prirodnu slatkoću bez kompromisa.",
         ],
         imageUrl: "/original.png",
+        cardImage: "/original uspravni.png",
     },
     {
         slug: "mango",
@@ -23,10 +24,11 @@ const proizvodi = [
         bg: "bg-orange-300",
         heading: "Mango",
         paragraphs: [
-            "Egzotičan i sunčan — ukus manga koji vas odmah prenosi na tropsku plažu. Koristimo zrele, sočne mango plodove čiji intenzivan miris i prirodna slatkoća oduševljavaju već na prvom zalogaju.",
-            "Voćan, živahan i osvježavajući. Idealan za tople dane i one koji vole egzotične ukuse — bez vještačkih aroma, samo čisti mango u svakom gramu.",
+            "Egzotičan i sunčan — ukus manga koji vas odmah prenosi na tropsku plažu. Koristimo zrele, sočne mango plodove.",
+            "Voćan, živahan i osvježavajući. Idealan za tople dane i one koji vole egzotične ukuse.",
         ],
         imageUrl: "/mango.png",
+        cardImage: "/uspravni mango.png",
     },
     {
         slug: "vanila",
@@ -34,10 +36,11 @@ const proizvodi = [
         bg: "bg-yellow-200",
         heading: "Vanila",
         paragraphs: [
-            "Klasičan i neodoljiv — ukus vanile koji nikad ne izlazi iz mode. Koristimo pravu bourbon vanilu, čiji topli i kremasti ton pruža osećaj udobnosti i raskoši u svakom trenutku.",
-            "Blag, ali kompleksan. Savršen za one koji cene jednostavnost i kvalitet sirovine iznad svega.",
+            "Klasičan i neodoljiv — ukus vanile koji nikad ne izlazi iz mode. Koristimo pravu bourbon vanilu.",
+            "Blag, ali kompleksan. Savršen za one koji cene jednostavnost i kvalitet sirovine.",
         ],
         imageUrl: "/vanilla.png",
+        cardImage: "/uspravna vanilla.png",
     },
     {
         slug: "mint",
@@ -45,10 +48,11 @@ const proizvodi = [
         bg: "bg-emerald-300",
         heading: "Mint",
         paragraphs: [
-            "Svjež i hladan — ukus mente koji budi osjetila. Prirodna menta daje intenzivan, čist i osvježavajući osjećaj koji traje dugo nakon posljednjeg zalogaja.",
-            "Savršen balans između osvježenja i slatkoće. Za one koji vole čist, mentolni ukus koji ih vraća u ravnotežu — prirodno, bez kompromisa.",
+            "Svjež i hladan — ukus mente koji budi osjetila. Prirodna menta daje intenzivan, čist i osvježavajući osjećaj.",
+            "Savršen balans između osvježenja i slatkoće. Za one koji vole čist, mentolni ukus.",
         ],
         imageUrl: "/mint.png",
+        cardImage: "/uspravni mint.png",
     },
     {
         slug: "jagoda",
@@ -56,10 +60,11 @@ const proizvodi = [
         bg: "bg-red-400",
         heading: "Jagoda",
         paragraphs: [
-            "Letnji klasik u svakom zalogaju. Ukus jagode donosi sećanje na sunčane popodne i zrele crvene jagode tek ubrane iz bašte — sladak, svež i neodoljivo mirisav.",
-            "Napravljen bez veštačkih boja i aroma, ovaj ukus je dokaz da priroda sama po sebi pruža dovoljno.",
+            "Letnji klasik u svakom zalogaju. Ukus jagode donosi sećanje na sunčane popodne i zrele jagode iz bašte.",
+            "Napravljen bez veštačkih boja i aroma — priroda sama po sebi pruža dovoljno.",
         ],
         imageUrl: "/jagoda.png",
+        cardImage: "/uspravna jagoda.png",
     },
 ];
 
@@ -68,104 +73,103 @@ export default function ProizvodSection() {
     const current = proizvodi[active];
 
     return (
-        <motion.section
-            id="proizvod"
-            className={`bg-[#8BEAF7] mx-[5vw] rounded-2xl overflow-hidden transition-colors duration-500 ${current.bg}`}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true }}
-        >
-            {/* Mobilni tabovi — flex-wrap */}
-            <div className="flex md:hidden flex-wrap justify-center gap-2 p-4">
+        <section id="proizvod" className="px-[5vw] py-16">
+            {/* Header */}
+            <motion.div
+                className="text-center mb-10"
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+            >
+                <h2 className="uppercase">Naši Ukusi</h2>
+                <p className="text-foreground/60 mt-2">Klikni na ukus koji te zanima</p>
+            </motion.div>
+
+            {/* Product cards grid */}
+            <motion.div
+                className="grid grid-cols-3 md:grid-cols-5 gap-3 mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+            >
                 {proizvodi.map((p, i) => (
-                    <button
+                    <motion.button
                         key={p.slug}
                         onClick={() => setActive(i)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer ${
-                            active === i
-                                ? "bg-foreground text-background"
-                                : "bg-background/30 text-foreground"
-                        }`}
+                        className={`relative rounded-2xl p-3 flex flex-col items-center gap-2 cursor-pointer ${p.bg} border-4 transition-colors duration-200 ${active === i ? "border-foreground" : "border-transparent hover:border-foreground/30"}`}
+                        whileHover={{ scale: 1.07, y: -4 }}
+                        whileTap={{ scale: 0.93 }}
+                        animate={active === i ? { scale: 1.05, y: -4 } : { scale: 1, y: 0 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 22 }}
                     >
-                        {p.label}
-                    </button>
-                ))}
-            </div>
+                        <div className="relative w-14 h-20 md:w-20 md:h-32">
+                            <Image
+                                src={p.cardImage}
+                                alt={p.label}
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                        <span className="font-bold text-xs md:text-sm uppercase leading-tight">{p.label}</span>
 
-            {/* Glavni layout */}
-            <div className="flex flex-col md:flex-row min-h-125">
-
-                {/* Desktop tabovi — vertikalni s leve strane */}
-                <div className="hidden md:flex flex-col justify-center gap-1 p-8 border-r border-background/20 min-w-45">
-                    {proizvodi.map((p, i) => (
-                        <button
-                            key={p.slug}
-                            onClick={() => setActive(i)}
-                            className={`relative text-left px-5 py-4 rounded-xl font-semibold text-lg transition-all duration-200 cursor-pointer ${
-                                active === i
-                                    ? "bg-foreground/90 text-background shadow-lg scale-[1.03]"
-                                    : "hover:bg-background/20 opacity-70 hover:opacity-100"
-                            }`}
-                        >
-                            {active === i && (
-                                <motion.span
-                                    layoutId="activeTab"
-                                    className="absolute inset-0 rounded-xl bg-foreground/90 -z-10"
-                                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                />
-                            )}
-                            {p.label}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Sadržaj */}
-                <div className="flex-1 p-6 md:p-12 flex items-center">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={current.slug}
-                            className="flex flex-col md:flex-row items-center gap-10 w-full"
-                            initial={{ opacity: 0, x: 40 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -40 }}
-                            transition={{ duration: 0.35, ease: "easeOut" }}
-                        >
-                            <div className="flex flex-col gap-4 flex-1">
-                                <h2 className="text-4xl font-bold">{current.heading}</h2>
-                                {current.paragraphs.map((p, i) => (
-                                    <p key={i} className="text-lg leading-relaxed opacity-80">{p}</p>
-                                ))}
-
-                                <div className="hidden md:block">
-                                    <Link href="naruci/">
-                                        <Button text="naruci labelo" variant="secondary" />
-                                    </Link>
-                                </div>
-                            </div>
-                            <motion.div 
-                                transition={{ duration: 0.6, ease: "easeOut"}}
-                                whileHover={{ scale: 1.04, zIndex: 10 }}
-                                className="rounded-2xl w-full md:w-120 object-cover"
-                                >
-                                    <Image 
-                                        src={current.imageUrl}
-                                        alt={current.heading}
-                                        width={800}
-                                        height={800}
-                                    />
+                        {active === i && (
+                            <motion.div
+                                className="absolute -top-1.5 -right-1.5 w-6 h-6 bg-foreground rounded-full flex items-center justify-center"
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ type: "spring", stiffness: 600, damping: 15 }}
+                            >
+                                <span className="text-background text-xs font-bold">✓</span>
                             </motion.div>
+                        )}
+                    </motion.button>
+                ))}
+            </motion.div>
 
-                            <div className="md:hidden">
-                                <Link href="naruci/">
-                                    <Button text="naruci labelo" variant="secondary" />
-                                </Link>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-            </div>
-        </motion.section>
+            {/* Detail panel */}
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={current.slug}
+                    className={`rounded-2xl ${current.bg} p-6 md:p-10 flex flex-col md:flex-row gap-8 items-center`}
+                    initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.96 }}
+                    transition={{ type: "spring", stiffness: 280, damping: 26 }}
+                >
+                    {/* Bouncing product image */}
+                    <motion.div
+                        initial={{ rotate: -20, scale: 0.4, opacity: 0 }}
+                        animate={{ rotate: -5, scale: 1, opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 14 }}
+                        whileHover={{ rotate: 0, scale: 1.08 }}
+                        className="shrink-0"
+                    >
+                        <Image
+                            src={current.imageUrl}
+                            alt={current.heading}
+                            width={220}
+                            height={220}
+                            className="object-contain drop-shadow-xl"
+                        />
+                    </motion.div>
+
+                    {/* Text */}
+                    <div className="flex flex-col gap-4 flex-1">
+                        <h3 className="uppercase font-black text-foreground">{current.heading}</h3>
+                        {current.paragraphs.map((text, i) => (
+                            <p key={i} className="text-foreground/80 leading-relaxed">{text}</p>
+                        ))}
+                        <div className="mt-2">
+                            <Link href="/naruci">
+                                <Button text="Naruči odmah" />
+                            </Link>
+                        </div>
+                    </div>
+                </motion.div>
+            </AnimatePresence>
+        </section>
     );
 }
 
