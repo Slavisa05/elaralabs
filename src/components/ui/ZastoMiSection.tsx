@@ -75,7 +75,7 @@ export default function ZastoMiSection() {
                             {benefits.map((b, i) => (
                                 <motion.div
                                     key={i}
-                                    className="flex flex-col items-center text-center gap-3 p-5 rounded-2xl bg-accent"
+                                    className="flex flex-col items-center text-center gap-3 p-5 rounded-2xl bg-background"
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.1 }}

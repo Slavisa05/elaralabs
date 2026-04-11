@@ -23,7 +23,7 @@ export default function TestimonialSection() {
     }, [controls]);
 
     return (
-        <section id="recenzije" className="mx-[5vw] py-4">
+        <section id="recenzije" className="mx-[5vw] py-4 rounded-2xl bg-background px-6 md:px-12">
             {/* Header */}
             <motion.div
                 className="text-center mb-10"

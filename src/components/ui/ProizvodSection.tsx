@@ -73,7 +73,7 @@ export default function ProizvodSection() {
     const current = proizvodi[active];
 
     return (
-        <section id="proizvod" className="px-[5vw] py-16">
+        <section id="proizvod" className="px-[5vw] py-16 bg-background">
             {/* Header */}
             <motion.div
                 className="text-center mb-10"
