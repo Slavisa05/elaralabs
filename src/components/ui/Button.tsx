@@ -12,7 +12,7 @@ interface ButtonProps {
 }
 
 const variantStyles = {
-    primary:   'bg-foreground text-white border-2 border-foreground hover:shadow-xl active:shadow-none',
+    primary:   'bg-accent text-foreground border-2 border-accent shadow-accent hover:shadow-xs active:shadow-none',
     secondary: 'bg-transparent text-foreground border-2 border-foreground before:absolute before:inset-0 before:bg-foreground before:origin-left before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-x-100 hover:text-white',
 };
 

@@ -1,22 +1,27 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import Button from "./Button";
+import Link from "next/link";
 
 export default function CTA() {
     return (
         <motion.section
-            className="relative overflow-hidden rounded-2xl mb-10 px-8 py-16 md:py-32 flex flex-col items-center justify-center text-center gap-8"
+            className="relative mx-[5vw] overflow-hidden rounded-2xl mb-10 px-8 py-20 md:py-36 flex flex-col items-center justify-center text-center gap-8"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
         >
             {/* Pozadinska slika */}
-            <img
-                src="https://placehold.co/1200x600"
+            <Image
+                src="/grupna-slika.png"
                 alt="cta pozadina"
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 90vw"
+                priority
             />
 
             {/* Tamni overlay */}
@@ -24,6 +29,17 @@ export default function CTA() {
 
             {/* Sadržaj */}
             <div className="relative z-10 flex flex-col items-center gap-6 max-w-xl text-white">
+                {/* Free shipping badge */}
+                <motion.div
+                    className="px-4 py-1.5 rounded-full bg-accent text-foreground text-sm font-bold uppercase tracking-wider"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.05 }}
+                    viewport={{ once: true }}
+                    animate={{ y: [0, -4, 0] }}
+                >
+                    🚚 Besplatna dostava iznad 2000 din
+                </motion.div>
                 <motion.h2
                     className="text-3xl md:text-5xl font-bold leading-tight"
                     initial={{ opacity: 0, y: 30 }}
@@ -51,8 +67,13 @@ export default function CTA() {
                     transition={{ duration: 0.55, ease: "easeOut", delay: 0.42 }}
                     viewport={{ once: true }}
                 >
-                    <Button text="Naruči odmah" />
-                    <Button text="Pogledaj ukuse" />
+                    <Link href="naruci/">
+                        <Button text="Naruči odmah" />
+                    </Link>
+
+                    <Link href="#proizvod">
+                        <Button text="Pogledaj ukuse" />
+                    </Link>
                 </motion.div>
             </div>
         </motion.section>
