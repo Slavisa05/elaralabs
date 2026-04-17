@@ -13,16 +13,20 @@ const textVariants = {
 export default function HeroSection() {
     return (
         <section
-            className="relative min-h-screen pt-[15vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden"
-            style={{
-                backgroundImage: "url('/planine.png')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-            }}
+            className="relative min-h-screen pt-[15vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
         >
+            {/* Hero slika — apsolutna pozicija, niži z-index */}
+            <Image
+                src="/hero.png"
+                alt="Elara hero"
+                width={1400}
+                height={900}
+                priority
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
+            />
+
             {/* Overlay for text contrast */}
-            <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-black/30 pointer-events-none z-1" />
 
             {/* Bottom gradient to blend into next section */}
             <div className="absolute bottom-0 left-0 right-0 h-48 bg-linear-to-b from-transparent to-background pointer-events-none z-10" />

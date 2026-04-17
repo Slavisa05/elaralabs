@@ -12,7 +12,7 @@ const proizvodi = [
         bg: "bg-amber-300",
         heading: "Med",
         paragraphs: [
-            "Topam i bogat — ukus meda koji vas vraća u djetinjstvo. Svaki zalogaj donosi prirodnu slatkoću planinskog meda, pažljivo odabranog od lokalnih pčelara.",
+            "Topao i bogat — ukus meda koji vas vraća u djetinjstvo. Svaki zalogaj donosi prirodnu slatkoću planinskog meda, pažljivo odabranog od lokalnih pčelara.",
             "Mekan, aromatičan i neodoljivo privlačan. Savršen za one koji traže prirodnu slatkoću bez kompromisa.",
         ],
         imageUrl: "/original.png",
@@ -73,7 +73,7 @@ export default function ProizvodSection() {
     const current = proizvodi[active];
 
     return (
-        <section id="proizvod" className="px-[5vw] py-16 bg-background">
+        <section id="proizvod" className="px-[5vw] py-25 bg-background">
             {/* Header */}
             <motion.div
                 className="text-center mb-10"
@@ -172,5 +172,3 @@ export default function ProizvodSection() {
         </section>
     );
 }
-
-

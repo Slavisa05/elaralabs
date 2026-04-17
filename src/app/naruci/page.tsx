@@ -73,7 +73,7 @@ export default function Naruci() {
   }
 
   return (
-    <main className="relative px-[5vw] pt-10 flex flex-col gap-10">
+    <main className="bg-white relative px-[5vw] pt-10 flex flex-col gap-10">
       <Link href="/" className="absolute top-5 left-2.5 flex items-center gap-4">
         <ArrowLeft size={32} />
         <strong className="uppercase">nazad na početnu</strong>
@@ -116,12 +116,13 @@ export default function Naruci() {
             {/* DESNO — Proizvodi */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto">
               {proizvodi.map(proizvod => (
-                <div key={proizvod.id} className="flex items-center justify-center">
+                <div key={proizvod.id} className="flex flex-col items-center justify-center gap-2">
                   <Draggable
                     id={proizvod.id}
                     imageUrl={proizvod.image}
                     alt={proizvod.name}
                   />
+                  <span className="text-sm font-semibold text-center">{proizvod.name}</span>
                 </div>
               ))}
             </div>

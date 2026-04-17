@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function CTA() {
     return (
         <motion.section
-            className="relative mx-[5vw] overflow-hidden rounded-2xl mb-10 px-8 py-20 md:py-36 flex flex-col items-center justify-center text-center gap-8"
+            className="relative mx-[5vw] overflow-hidden rounded-2xl mb-10 px-8 py-25 md:py-36 flex flex-col items-center justify-center text-center gap-8"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -79,4 +79,3 @@ export default function CTA() {
         </motion.section>
     );
 }
-

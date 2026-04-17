@@ -11,10 +11,6 @@ import Button from '../Button'
 import Modal from '../Modal'
 import { Minus, Plus, Trash2 } from 'lucide-react'
 
-// Predefinisane rotacije za stack efekat
-const rotacije = [-6, 4, -3, 7, -5]
-
-// Predefinisane pozicije srca
 const srca = [
   { x: -40, delay: 0 },
   { x: -10, delay: 0.1 },
@@ -23,6 +19,10 @@ const srca = [
   { x: -25, delay: 0.2 },
 ]
 
+// Koliko labela viri iz kutije (prvi red)
+const PEEK_COUNT = 5
+const PEEK_COUNT_MOBILE = 3
+
 interface CartBoxProps {
   phase: AnimationPhase
   lidRef?: React.RefObject<HTMLDivElement | null>
@@ -30,26 +30,19 @@ interface CartBoxProps {
 }
 
 export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) {
-  // modal za pregled korpe
-  const [isPregledOpen, setIsPregledOpen ] = useState(false)
+  const [isPregledOpen, setIsPregledOpen] = useState(false)
 
   const { setNodeRef, isOver } = useDroppable({ id: 'korpa' })
   const { items, totalPrice, updateQuantity, removeItem } = useCart()
 
   async function handleCheckout() {
     const url = await createCheckout(items)
-    window.location.href = url  // redirect na Shopify checkout
+    window.location.href = url
   }
 
-  // Ova funkcija se poziva iz page.tsx kada se nešto dropuje
-  // Koristimo useImperativeHandle ili jednostavno ref callback
-  // Umesto toga, page.tsx će zvati triggerAnimation direktno
-
-  const isLidOpen = phase === 'lid-open' || phase === 'item-enter'
   const isShaking = phase === 'shake'
   const showHearts = phase === 'hearts'
 
-  // Razvij items×quantity u individualnu listu sa jedinstvenim ključem
   const flatItems = items.flatMap(item =>
     Array.from({ length: item.quantity }, (_, i) => ({
       key: `${item.variant.id}-${i}`,
@@ -58,154 +51,171 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
     }))
   )
 
-  const N_COLS = 10
-  const rows: typeof flatItems[] = []
-  for (let i = 0; i < flatItems.length; i += N_COLS) {
-    rows.push(flatItems.slice(i, i + N_COLS))
-  }
-
-  const N_COLS_MOBILE = 3
-  const MAX_ROWS_MOBILE = 4
-  const rowsMobile: typeof flatItems[] = []
-  for (let i = 0; i < flatItems.length; i += N_COLS_MOBILE) {
-    rowsMobile.push(flatItems.slice(i, i + N_COLS_MOBILE))
-  }
-  const visibleRowsMobile = rowsMobile.slice(0, MAX_ROWS_MOBILE)
+  // Podeli na: prvi red (viri) i ostali (skriveni iza kutije)
+  const peekItems = flatItems.slice(0, PEEK_COUNT)
+  const hiddenItems = flatItems.slice(PEEK_COUNT)
+  const peekItemsMobile = flatItems.slice(0, PEEK_COUNT_MOBILE)
+  const hiddenItemsMobile = flatItems.slice(PEEK_COUNT_MOBILE)
 
   return (
     <div className="flex flex-col h-full gap-4">
 
-      {/* KUTIJA — ceo animirani blok */}
       <div className="flex-1 flex flex-col items-center justify-center">
 
         {/* Wrapper za tresenje */}
         <motion.div
-          className="relative w-full"
+          ref={setNodeRef}
+          className="relative w-full max-w-100 md:max-w-140 mx-auto"
           animate={isShaking ? {
             x: [-6, 6, -6, 6, -4, 4, 0],
           } : { x: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
 
-          {/* POKLOPAC */}
-          <motion.div
-            ref={lidRef}
-            className={`
-              relative z-10 w-full h-8 rounded-t-xl flex items-center justify-center
-              transition-colors duration-200
-              ${isOver ? 'bg-amber-400' : 'bg-amber-600'}
-            `}
-            animate={{ y: isLidOpen ? -32 : 0 }}
-            transition={{ duration: 0.35, ease: 'easeInOut' }}
-          >
-            {/* Šraf na poklopcu — dekoracija */}
-            <div className="w-16 h-2 bg-amber-800 rounded-full opacity-50" />
-          </motion.div>
+          {/* === SLOJ 0: Skrivene labele — IZA kutije === */}
+          {hiddenItems.length > 0 && (
+            <div className="hidden md:flex absolute z-0 top-[42%] left-[28%] right-[28%] flex-row flex-wrap gap-1 justify-center">
+              {hiddenItems.map(item => (
+                <motion.img
+                  key={item.key}
+                  src={item.image}
+                  alt={item.name}
+                  className="w-12 h-12 lg:w-14 lg:h-14 rounded-md object-cover shadow-sm"
+                  initial={{ opacity: 0, scale: 0.3 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, ease: 'backOut' }}
+                />
+              ))}
+            </div>
+          )}
+          {hiddenItemsMobile.length > 0 && (
+            <div className="md:hidden absolute z-0 top-[42%] left-[24%] right-[24%] flex flex-row flex-wrap gap-1 justify-center">
+              {hiddenItemsMobile.map(item => (
+                <motion.img
+                  key={item.key}
+                  src={item.image}
+                  alt={item.name}
+                  className="w-10 h-10 rounded-md object-cover shadow-sm"
+                  initial={{ opacity: 0, scale: 0.3 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, ease: 'backOut' }}
+                />
+              ))}
+            </div>
+          )}
 
-          {/* TELO KUTIJE */}
+          {/* === SLOJ 10: Slika kutije === */}
+          <img
+            src="/kutija.jpg"
+            alt="Elara kutija"
+            className="relative z-10 w-full h-auto select-none pointer-events-none"
+            draggable={false}
+          />
+
+          {/* Lid ref — nevidljiva meta za leteći item */}
           <div
-            ref={setNodeRef}
-            className={`
-              relative w-full h-80 rounded-b-xl rounded-tr-xl p-3
-              flex flex-col overflow-hidden
-              border-4 transition-colors duration-200
-              ${isOver
-                ? 'bg-amber-50 border-amber-400'
-                : 'bg-amber-100 border-amber-600'
-              }
-            `}
-          >
-            {/* Highlight kada se vuče iznad */}
-            <AnimatePresence>
-              {isOver && (
-                <motion.div
-                  className="absolute inset-0 bg-amber-300 rounded-b-xl rounded-tr-xl"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.2 }}
-                  exit={{ opacity: 0 }}
-                />
-              )}
-            </AnimatePresence>
+            ref={lidRef}
+            className="absolute z-20 top-[32%] left-[25%] right-[25%] h-[5%]"
+          />
 
-            {/* PRAZNA KORPA */}
-            {flatItems.length === 0 && (
-              <div className="flex-1 flex items-center justify-center">
-                <p className="text-amber-800 text-sm text-center opacity-60 select-none">
-                  Prevuci proizvod ovde
-                </p>
-              </div>
-            )}
-
-            {/* GRID PAKOVANJE — redovi odozdo nagore */}
-            {rows.length > 0 && (
-              <>
-                {/* DESKTOP: 10 kolona */}
-                <div className="hidden md:flex absolute bottom-2 left-4 right-2 flex-col-reverse gap-1">
-                  {rows.map((row, rowIndex) => (
-                    <div key={rowIndex} className="flex flex-row gap-1">
-                      {row.map(item => (
-                        <motion.img
-                          key={item.key}
-                          src={item.image}
-                          alt={item.name}
-                          className="w-14 h-14 rounded-md object-cover shadow-sm shrink-0"
-                          initial={{ opacity: 0, scale: 0.3, y: -20 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          transition={{ duration: 0.3, ease: 'backOut' }}
-                        />
-                      ))}
-                    </div>
-                  ))}
-                </div>
-
-                {/* MOBILNI: 3 kolone, max 5 redova */}
-                <div className="md:hidden absolute bottom-2 left-2 right-2 flex flex-col-reverse gap-1 overflow-hidden">
-                  {visibleRowsMobile.map((row, rowIndex) => (
-                    <div key={rowIndex} className="flex flex-row gap-1">
-                      {row.map(item => (
-                        <motion.img
-                          key={item.key}
-                          src={item.image}
-                          alt={item.name}
-                          className="w-15 h-15 shrink-0 rounded-md object-cover shadow-sm"
-                          initial={{ opacity: 0, scale: 0.3, y: -20 }}
-                          animate={{ opacity: 1, scale: 1, y: 0 }}
-                          transition={{ duration: 0.3, ease: 'backOut' }}
-                        />
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {/* Item koji "ulazi" animacija */}
-            <AnimatePresence>
-              {phase === 'item-enter' && (
-                <motion.div
-                  className="absolute w-16 h-16 rounded-lg z-50 bg-amber-300 bg-cover bg-center"
-                  style={enteringImage ? { backgroundImage: `url(${enteringImage})` } : undefined}
-                  initial={{ opacity: 1, y: -60, scale: 0.8 }}
-                  animate={{ opacity: 0, y: 20, scale: 0.3 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4, ease: 'easeIn' }}
-                />
-              )}
-            </AnimatePresence>
-          </div>
-
-          {/* SRCA — izlaze iz kutije */}
+          {/* Hover glow */}
           <AnimatePresence>
-            {showHearts && srca.map((srce, i) => (
-              <HeartParticle key={i} x={srce.x} delay={srce.delay} />
-            ))}
+            {isOver && (
+              <motion.div
+                className="absolute inset-0 z-20 rounded-lg ring-4 ring-teal-400/60 bg-teal-300/10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              />
+            )}
           </AnimatePresence>
 
-          {/* Natpis na kutiji */}
-          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2">
-            <span className="bg-amber-600 text-white text-xs px-3 py-1 rounded-full whitespace-nowrap">
-              Korpa
-            </span>
+          {/* Prazna kutija tekst */}
+          {flatItems.length === 0 && (
+            <div className="absolute z-20 top-[30%] left-[25%] right-[25%] flex items-center justify-center">
+              <p className="text-white/60 text-xs md:text-sm text-center select-none drop-shadow-md">
+                Prevuci labelu ovde
+              </p>
+            </div>
+          )}
+
+          {/* === SLOJ 20: Labele koje VIRE iz kutije === */}
+          {peekItems.length > 0 && (
+            <div
+              className="hidden md:flex absolute z-20 left-[28%] right-[28%] flex-row gap-2 justify-center"
+              style={{ top: '34%', transform: 'translateY(-50%)' }}
+            >
+              {peekItems.map((item, i) => (
+                <motion.img
+                  key={item.key}
+                  src={item.image}
+                  alt={item.name}
+                  className="w-12 h-18 lg:w-14 lg:h-20 rounded-lg object-cover shadow-lg border border-white/40"
+                  initial={{ opacity: 0, y: 20, scale: 0.5 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    rotate: (i % 2 === 0 ? -3 : 3) + (i - 2) * 1.5,
+                  }}
+                  transition={{ duration: 0.4, ease: 'backOut', delay: i * 0.05 }}
+                />
+              ))}
+            </div>
+          )}
+          {peekItemsMobile.length > 0 && (
+            <div
+              className="md:hidden absolute z-20 left-[22%] right-[22%] flex flex-row gap-2 justify-center"
+              style={{ top: '34%', transform: 'translateY(-50%)' }}
+            >
+              {peekItemsMobile.map((item, i) => (
+                <motion.img
+                  key={item.key}
+                  src={item.image}
+                  alt={item.name}
+                  className="w-10 h-16 rounded-lg object-cover shadow-lg border border-white/40"
+                  initial={{ opacity: 0, y: 20, scale: 0.5 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    rotate: (i % 2 === 0 ? -3 : 3) + (i - 1) * 2,
+                  }}
+                  transition={{ duration: 0.4, ease: 'backOut', delay: i * 0.05 }}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* === SLOJ 30: Leteći item — ulazi u kutiju === */}
+          <AnimatePresence>
+            {phase === 'item-enter' && (
+              <motion.div
+                className="absolute left-1/2 top-[28%] w-14 h-14 md:w-18 md:h-18 rounded-lg bg-cover bg-center"
+                style={{
+                  translateX: '-50%',
+                  ...(enteringImage ? { backgroundImage: `url(${enteringImage})` } : {}),
+                }}
+                initial={{ opacity: 1, y: -60, scale: 0.9, zIndex: 30 }}
+                animate={{ opacity: 0, y: 60, scale: 0.3, zIndex: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.4,
+                  ease: 'easeIn',
+                  zIndex: { duration: 0, delay: 0.15 },
+                }}
+              />
+            )}
+          </AnimatePresence>
+
+          {/* === SLOJ 30: Srca === */}
+          <div className="absolute z-30 top-[30%] left-1/2">
+            <AnimatePresence>
+              {showHearts && srca.map((srce, i) => (
+                <HeartParticle key={i} x={srce.x} delay={srce.delay} />
+              ))}
+            </AnimatePresence>
           </div>
 
         </motion.div>
@@ -241,7 +251,7 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
                 className="w-14 h-14 rounded-xl object-cover shrink-0"
               />
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm leading-tight">Labelo {item.variant.name}</p>
+                <p className="font-semibold text-sm leading-tight">{item.variant.name}</p>
                 <p className="text-xs opacity-50 mt-0.5">{item.variant.price} RSD / kom</p>
               </div>
               <div className="flex items-center gap-2 shrink-0">

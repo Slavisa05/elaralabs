@@ -60,7 +60,7 @@ export async function getProducts() {
   return data.products.edges.flatMap(({ node: product }) =>
     product.variants.edges.map(({ node: variant }) => ({
       id: variant.id,
-      name: `${product.title} — ${variant.title}`,
+      name: variant.title === 'Default Title' ? product.title : `${product.title} — ${variant.title}`,
       price: parseFloat(variant.price.amount),
       image: variant.image?.url ?? 'https://placehold.co/200',
     }))

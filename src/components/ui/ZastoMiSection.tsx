@@ -21,7 +21,7 @@ const benefits = [
 
 export default function ZastoMiSection() {
     return (
-        <section id="zasto-mi" className="overflow-hidden">
+        <section id="zasto-mi" className="overflow-hidden pb-20">
 
             {/* Scrolling ticker strip */}
             <div className="bg-foreground text-background py-3 overflow-hidden">
@@ -55,6 +55,7 @@ export default function ZastoMiSection() {
                             alt="3 Elara proizvoda"
                             width={600}
                             height={600}
+                            style={{ height: "auto" }}
                             className="object-contain"
                         />
                     </motion.div>
