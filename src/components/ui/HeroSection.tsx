@@ -13,16 +13,16 @@ const textVariants = {
 export default function HeroSection() {
     return (
         <section
-            className="relative min-h-screen pt-[15vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
+            className="relative min-h-screen pt-[12vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
         >
-            {/* Hero slika — apsolutna pozicija, niži z-index */}
+            {/* Hero slika — dole na mobilnom, centrirana na desktopu */}
             <Image
                 src="/hero.png"
                 alt="Elara hero"
                 width={1400}
                 height={900}
                 priority
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full md:bottom-auto md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
             />
 
             {/* Overlay for text contrast */}
@@ -33,22 +33,22 @@ export default function HeroSection() {
 
             {/* Spinning sticker badge */}
             <motion.div
-                className="absolute top-[18vh] right-[2vw] md:right-[8vw] z-20 w-20 h-20 md:w-28 md:h-28 rounded-full bg-accent flex items-center justify-center cursor-default select-none shadow-xl"
+                className="absolute top-[18vh] right-[2vw] md:top-[18vh] md:right-[4vw] z-20 w-16 h-16 md:w-28 md:h-28 rounded-full bg-accent flex items-center justify-center cursor-default select-none shadow-xl"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
             >
-                <div className="font-black uppercase text-center leading-tight text-foreground text-xs md:text-sm pointer-events-none">
+                <div className="font-black uppercase text-center leading-tight text-foreground text-[10px] md:text-sm pointer-events-none">
                     5<br />ukusa<br />★
                 </div>
             </motion.div>
 
-            {/* Main content */}
-            <div className="w-full relative z-10 flex-1 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 pb-32">
+            {/* Main content — tekst gore, slika dole */}
+            <div className="w-full relative z-10 flex flex-col items-center justify-center gap-6 pt-18 md:flex-1 md:flex-row md:items-start md:gap-12">
 
                 {/* Text side */}
-                <div className="flex flex-col items-center gap-6 md:flex-1">
+                <div className="flex flex-col items-center gap-4 md:gap-6 md:flex-1">
                     <motion.h1
-                        className="text-center md:text-start text-white drop-shadow-lg"
+                        className="text-center md:text-start text-white drop-shadow-lg text-3xl md:text-5xl lg:text-6xl"
                         variants={textVariants}
                         initial="hidden"
                         animate="visible"
@@ -58,7 +58,7 @@ export default function HeroSection() {
                     </motion.h1>
 
                     <motion.p
-                        className="text-center md:text-start text-white/90 text-lg"
+                        className="text-center md:text-start text-white/90 text-base md:text-lg"
                         variants={textVariants}
                         initial="hidden"
                         animate="visible"
@@ -68,7 +68,7 @@ export default function HeroSection() {
                     </motion.p>
 
                     <motion.div
-                        className="flex flex-col sm:flex-row items-center gap-4"
+                        className="flex flex-col sm:flex-row items-center gap-3 md:gap-4"
                         variants={textVariants}
                         initial="hidden"
                         animate="visible"
@@ -76,9 +76,6 @@ export default function HeroSection() {
                     >
                         <Link href="/naruci">
                             <Button text="Naruči odmah" />
-                        </Link>
-                        <Link href="#proizvod">
-                            <Button text="Pogledaj ukuse" />
                         </Link>
                     </motion.div>
                 </div>
