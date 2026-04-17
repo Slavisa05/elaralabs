@@ -2,6 +2,7 @@
 
 import { useDroppable } from '@dnd-kit/core'
 import { motion, AnimatePresence } from 'framer-motion'
+import { createCheckout } from '@/lib/queries/checkout'
 import { useCart } from '@/hooks/useCart'
 import { AnimationPhase } from '@/hooks/useCartAnimation'
 import { useState } from 'react'
@@ -34,6 +35,11 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
 
   const { setNodeRef, isOver } = useDroppable({ id: 'korpa' })
   const { items, totalPrice, updateQuantity, removeItem } = useCart()
+
+  async function handleCheckout() {
+    const url = await createCheckout(items)
+    window.location.href = url  // redirect na Shopify checkout
+  }
 
   // Ova funkcija se poziva iz page.tsx kada se nešto dropuje
   // Koristimo useImperativeHandle ili jednostavno ref callback
@@ -220,7 +226,7 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             </p>
 
             <Button text='pogledaj korpu' variant='secondary' onClick={() => setIsPregledOpen(true)} />
-            <Button text='naruci' />
+            <Button text='naruci' onClick={handleCheckout} />
           </motion.div>
         )}
       </AnimatePresence>
