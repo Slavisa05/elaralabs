@@ -16,7 +16,7 @@ const proizvodi = [
             "Mekan, aromatičan i neodoljivo privlačan. Savršen za one koji traže prirodnu slatkoću bez kompromisa.",
         ],
         imageUrl: "/original.png",
-        cardImage: "/original uspravni.png",
+        cardImage: "/original_uspravni.png",
     },
     {
         slug: "mango",
@@ -28,7 +28,7 @@ const proizvodi = [
             "Voćan, živahan i osvježavajući. Idealan za tople dane i one koji vole egzotične ukuse.",
         ],
         imageUrl: "/mango.png",
-        cardImage: "/uspravni mango.png",
+        cardImage: "/uspravni_mango.png",
     },
     {
         slug: "vanila",
@@ -40,7 +40,7 @@ const proizvodi = [
             "Blag, ali kompleksan. Savršen za one koji cene jednostavnost i kvalitet sirovine.",
         ],
         imageUrl: "/vanilla.png",
-        cardImage: "/uspravna vanilla.png",
+        cardImage: "/uspravna_vanilla.png",
     },
     {
         slug: "mint",
@@ -52,7 +52,7 @@ const proizvodi = [
             "Savršen balans između osvježenja i slatkoće. Za one koji vole čist, mentolni ukus.",
         ],
         imageUrl: "/mint.png",
-        cardImage: "/uspravni mint.png",
+        cardImage: "/uspravni_mint.png",
     },
     {
         slug: "jagoda",
@@ -64,7 +64,7 @@ const proizvodi = [
             "Napravljen bez veštačkih boja i aroma — priroda sama po sebi pruža dovoljno.",
         ],
         imageUrl: "/jagoda.png",
-        cardImage: "/uspravna jagoda.png",
+        cardImage: "/uspravna_jagoda.png",
     },
 ];
 
@@ -104,11 +104,12 @@ export default function ProizvodSection() {
                         animate={active === i ? { scale: 1.05, y: -4 } : { scale: 1, y: 0 }}
                         transition={{ type: "spring", stiffness: 400, damping: 22 }}
                     >
-                        <div className="relative w-14 h-20 md:w-20 md:h-32">
+                        <div className="relative w-25 h-15 md:w-40 md:h-32">
                             <Image
                                 src={p.cardImage}
                                 alt={p.label}
-                                fill
+                                width={400}
+                                height={400}
                                 className="object-contain"
                             />
                         </div>
@@ -151,6 +152,7 @@ export default function ProizvodSection() {
                             alt={current.heading}
                             width={220}
                             height={220}
+                            style={{ height: "auto" }}
                             className="object-contain drop-shadow-xl"
                         />
                     </motion.div>

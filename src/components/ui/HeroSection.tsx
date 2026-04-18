@@ -41,7 +41,7 @@ export default function HeroSection() {
                     alt="labelo med"
                     width={200}
                     height={200}
-                    className="z-20"
+                    className="w-full h-auto"
                 />
             </motion.div>
             
@@ -54,7 +54,7 @@ export default function HeroSection() {
                     alt="labelo jagoda"
                     width={200}
                     height={200}
-                    className="z-20"
+                    className="w-full h-auto"
                 />
             </motion.div>
             
@@ -67,7 +67,7 @@ export default function HeroSection() {
                     alt="labelo vanila"
                     width={200}
                     height={200}
-                    className="z-20"
+                    className="w-full h-auto"
                 />
             </motion.div>
             
@@ -80,7 +80,7 @@ export default function HeroSection() {
                     alt="labelo mango"
                     width={200}
                     height={200}
-                    className="z-20"
+                    className="w-full h-auto"
                 />
             </motion.div>
             
@@ -93,7 +93,7 @@ export default function HeroSection() {
                     alt="labelo mint"
                     width={200}
                     height={200}
-                    className="z-20"
+                    className="w-full h-auto"
                 />
             </motion.div>
 
