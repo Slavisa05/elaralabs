@@ -19,9 +19,8 @@ const srca = [
   { x: -25, delay: 0.2 },
 ]
 
-// Koliko labela viri iz kutije (prvi red)
 const PEEK_COUNT = 5
-const PEEK_COUNT_MOBILE = 3
+const PEEK_COUNT_MOBILE = 5
 
 interface CartBoxProps {
   phase: AnimationPhase
@@ -51,36 +50,36 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
     }))
   )
 
-  // Podeli na: prvi red (viri) i ostali (skriveni iza kutije)
   const peekItems = flatItems.slice(0, PEEK_COUNT)
   const hiddenItems = flatItems.slice(PEEK_COUNT)
   const peekItemsMobile = flatItems.slice(0, PEEK_COUNT_MOBILE)
   const hiddenItemsMobile = flatItems.slice(PEEK_COUNT_MOBILE)
+
+  // Rotacije za fan efekat — 5 labela
+  const rotacije = [-10, -5, 0, 5, 10]
+  const rotacijeMobile = [-8, 0, 8]
 
   return (
     <div className="flex flex-col h-full gap-4">
 
       <div className="flex-1 flex flex-col items-center justify-center">
 
-        {/* Wrapper za tresenje */}
         <motion.div
           ref={setNodeRef}
           className="relative w-full max-w-100 md:max-w-140 mx-auto"
-          animate={isShaking ? {
-            x: [-6, 6, -6, 6, -4, 4, 0],
-          } : { x: 0 }}
+          animate={isShaking ? { x: [-6, 6, -6, 6, -4, 4, 0] } : { x: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
 
-          {/* === SLOJ 0: Skrivene labele — IZA kutije === */}
+          {/* === SLOJ 0: Skrivene labele IZA kutije === */}
           {hiddenItems.length > 0 && (
-            <div className="hidden md:flex absolute z-0 top-[42%] left-[28%] right-[28%] flex-row flex-wrap gap-1 justify-center">
+            <div className="hidden md:flex absolute z-0 top-[48%] left-[30%] right-[30%] flex-row flex-wrap gap-1 justify-center">
               {hiddenItems.map(item => (
                 <motion.img
                   key={item.key}
                   src={item.image}
                   alt={item.name}
-                  className="w-12 h-12 lg:w-14 lg:h-14 rounded-md object-cover shadow-sm"
+                  className="w-10 h-10 lg:w-12 lg:h-12 rounded-md object-cover shadow-sm"
                   initial={{ opacity: 0, scale: 0.3 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: 'backOut' }}
@@ -89,13 +88,13 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             </div>
           )}
           {hiddenItemsMobile.length > 0 && (
-            <div className="md:hidden absolute z-0 top-[42%] left-[24%] right-[24%] flex flex-row flex-wrap gap-1 justify-center">
+            <div className="md:hidden absolute z-0 top-[48%] left-[26%] right-[26%] flex flex-row flex-wrap gap-1 justify-center">
               {hiddenItemsMobile.map(item => (
                 <motion.img
                   key={item.key}
                   src={item.image}
                   alt={item.name}
-                  className="w-10 h-10 rounded-md object-cover shadow-sm"
+                  className="w-9 h-9 rounded-md object-cover shadow-sm"
                   initial={{ opacity: 0, scale: 0.3 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: 'backOut' }}
@@ -106,13 +105,13 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
 
           {/* === SLOJ 10: Slika kutije === */}
           <img
-            src="/kutija.jpg"
+            src="/kutija.png"
             alt="Elara kutija"
             className="relative z-10 w-full h-auto select-none pointer-events-none"
             draggable={false}
           />
 
-          {/* Lid ref — nevidljiva meta za leteći item */}
+          {/* Lid ref */}
           <div
             ref={lidRef}
             className="absolute z-20 top-[32%] left-[25%] right-[25%] h-[5%]"
@@ -140,55 +139,85 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             </div>
           )}
 
-          {/* === SLOJ 20: Labele koje VIRE iz kutije === */}
+          {/* === SLOJ 20: Labele koje VIRE iz kutije — desktop === */}
           {peekItems.length > 0 && (
             <div
-              className="hidden md:flex absolute z-20 left-[28%] right-[28%] flex-row gap-2 justify-center"
-              style={{ top: '34%', transform: 'translateY(-50%)' }}
+              className="hidden md:flex absolute z-20 left-[20%] right-[20%] flex-row justify-center"
+              style={{
+                top: '26%',           // koliko su duboko u kutiji
+                alignItems: 'flex-end',
+              }}
             >
               {peekItems.map((item, i) => (
                 <motion.img
                   key={item.key}
                   src={item.image}
                   alt={item.name}
-                  className="w-12 h-18 lg:w-14 lg:h-20 rounded-lg object-cover shadow-lg border border-white/40"
-                  initial={{ opacity: 0, y: 20, scale: 0.5 }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    rotate: (i % 2 === 0 ? -3 : 3) + (i - 2) * 1.5,
+                  className="w-22 h-100 rounded-lg object-cover"
+                  style={{
+                    marginLeft: i === 0 ? 0 : '-10px',   // overlap
+                    transformOrigin: 'bottom center',     // rotira oko dna
+                    zIndex: i === 2 ? 25 : 20,            // srednja labela ispred
                   }}
-                  transition={{ duration: 0.4, ease: 'backOut', delay: i * 0.05 }}
+                  initial={{ opacity: 0, y: -30, scale: 0.5 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.4, ease: 'backOut', delay: i * 0.06 }}
                 />
               ))}
             </div>
           )}
+
+          {/* === SLOJ 20: Labele koje VIRE iz kutije — mobile === */}
           {peekItemsMobile.length > 0 && (
             <div
-              className="md:hidden absolute z-20 left-[22%] right-[22%] flex flex-row gap-2 justify-center"
-              style={{ top: '34%', transform: 'translateY(-50%)' }}
+              className="md:hidden flex absolute z-20 left-[18%] right-[18%] flex-row justify-center"
+              style={{
+                top: '30%',
+                alignItems: 'flex-end',
+              }}
             >
               {peekItemsMobile.map((item, i) => (
                 <motion.img
                   key={item.key}
                   src={item.image}
                   alt={item.name}
-                  className="w-10 h-16 rounded-lg object-cover shadow-lg border border-white/40"
-                  initial={{ opacity: 0, y: 20, scale: 0.5 }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    rotate: (i % 2 === 0 ? -3 : 3) + (i - 1) * 2,
+                  className="w-12 h-30 rounded-lg object-cover"
+                  style={{
+                    marginLeft: i === 0 ? 0 : '-20px',
+                    transformOrigin: 'bottom center',
+                    zIndex: i === 1 ? 25 : 20,
                   }}
-                  transition={{ duration: 0.4, ease: 'backOut', delay: i * 0.05 }}
+                  initial={{ opacity: 0, y: -30, scale: 0.5 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.4, ease: 'backOut', delay: i * 0.06 }}
                 />
               ))}
             </div>
           )}
 
-          {/* === SLOJ 30: Leteći item — ulazi u kutiju === */}
+          {/* Broj skrivenih labela — badge */}
+          {hiddenItems.length > 0 && (
+            <motion.div
+              className="hidden md:flex absolute z-30 right-[18%] top-[25%] bg-teal-500 text-white text-xs font-bold w-7 h-7 rounded-full items-center justify-center shadow-lg"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', delay: 0.3 }}
+            >
+              +{hiddenItems.length}
+            </motion.div>
+          )}
+          {hiddenItemsMobile.length > 0 && (
+            <motion.div
+              className="md:hidden absolute z-30 right-[16%] top-[25%] bg-teal-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', delay: 0.3 }}
+            >
+              +{hiddenItemsMobile.length}
+            </motion.div>
+          )}
+
+          {/* === SLOJ 30: Leteći item === */}
           <AnimatePresence>
             {phase === 'item-enter' && (
               <motion.div
@@ -234,7 +263,6 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             <p className="text-sm font-semibold text-center">
               Ukupno: {totalPrice} RSD
             </p>
-
             <Button text='pogledaj korpu' variant='secondary' onClick={() => setIsPregledOpen(true)} />
             <Button text='naruci' onClick={handleCheckout} />
           </motion.div>

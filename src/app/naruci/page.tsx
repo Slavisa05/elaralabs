@@ -10,6 +10,7 @@ import { getProducts } from '@/lib/queries/products'
 import Link from 'next/link'
 import Draggable from '@/components/ui/naruci/Draggable'
 import CartBox from '@/components/ui/naruci/CartBox'
+import LabeloParticles from '@/components/ui/naruci/LabeloParticles'
 
 interface FlyingItem {
   image: string
@@ -73,7 +74,8 @@ export default function Naruci() {
   }
 
   return (
-    <main className="bg-white relative px-[5vw] pt-10 flex flex-col gap-10">
+    <main className="bg-background relative px-[5vw] pt-10 flex flex-col gap-10">
+      <LabeloParticles />
       <Link href="/" className="absolute top-5 left-2.5 flex items-center gap-4">
         <ArrowLeft size={32} />
         <strong className="uppercase">nazad na početnu</strong>

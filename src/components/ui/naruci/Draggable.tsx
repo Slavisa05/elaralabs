@@ -19,7 +19,7 @@ export default function Draggable({ id, imageUrl, alt }: DraggableProps) {
       className="relative cursor-grab active:cursor-grabbing"
       style={{ opacity: isDragging ? 0.3 : 1, touchAction: 'none' }}
     >
-      <img src={imageUrl} alt={alt} className="w-24 h-24 md:w-48 md:h-48 object-cover rounded-xl" />
+      <img src={imageUrl} alt={alt} className="w-24 h-32 md:w-48 md:h-100 object-cover rounded-xl" />
     </div>
   )
 }
