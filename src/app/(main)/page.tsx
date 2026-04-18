@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import HeroSection from "@/components/ui/HeroSection";
+import ShowcaseSection from "@/components/ui/ShowcaseSection";
 import ProizvodSection from "@/components/ui/ProizvodSection";
 import ZastoMiSection from "@/components/ui/ZastoMiSection";
 import TestimonialSection from "@/components/ui/TestimonialSection";
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <main className="flex flex-col">
         <HeroSection />
+        <ShowcaseSection />
         <ProizvodSection />
         <ZastoMiSection />
         <TestimonialSection />

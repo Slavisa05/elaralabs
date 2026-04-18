@@ -31,15 +31,70 @@ export default function HeroSection() {
             {/* Bottom gradient to blend into next section */}
             <div className="absolute bottom-0 left-0 right-0 h-48 bg-linear-to-b from-transparent to-background pointer-events-none z-10" />
 
-            {/* Spinning sticker badge */}
+            {/* Floating images */}
+            <motion.div 
+                animate={{ y: [-5, 5], rotate: 45 }}
+                transition={{ y:{ duration: 2, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }, rotate: { duration: 10 },}}
+                className="absolute left-[-8vw] md:left-0 top-27 md:top-35 transform-[rotate(45deg)] z-20 w-35 md:w-50">
+                <Image 
+                    src="/original_uspravni.png"
+                    alt="labelo med"
+                    width={200}
+                    height={200}
+                    className="z-20"
+                />
+            </motion.div>
+            
+            <motion.div 
+                animate={{ y: [-5, 5], rotate: -45 }}
+                transition={{ y:{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }, rotate: { duration: 10, delay: 0.5 },}}
+                className="absolute right-[-8vw] md:right-0 top-27 md:top-35 transform-[rotate(-45deg)] z-20 w-35 md:w-50">
+                <Image 
+                    src="/uspravna_jagoda.png"
+                    alt="labelo jagoda"
+                    width={200}
+                    height={200}
+                    className="z-20"
+                />
+            </motion.div>
+            
+            <motion.div 
+                animate={{ y: [-5, 5], rotate: 45 }}
+                transition={{ y:{ duration: 2, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }, rotate: { duration: 10 },}}
+                className="absolute right-[-8vw] md:right-0 bottom-27 transform-[rotate(45deg)] z-20 w-35 md:w-50">
+                <Image 
+                    src="/uspravna_vanilla.png"
+                    alt="labelo vanila"
+                    width={200}
+                    height={200}
+                    className="z-20"
+                />
+            </motion.div>
+            
             <motion.div
-                className="absolute top-[18vh] right-[2vw] md:top-[18vh] md:right-[4vw] z-20 w-16 h-16 md:w-28 md:h-28 rounded-full bg-accent flex items-center justify-center cursor-default select-none shadow-xl"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            >
-                <div className="font-black uppercase text-center leading-tight text-foreground text-[10px] md:text-sm pointer-events-none">
-                    5<br />ukusa<br />★
-                </div>
+                animate={{ y: [-5, 5], rotate: -45 }}
+                transition={{ y:{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }, rotate: { duration: 10, delay: 0.5 },}}
+                className="absolute left-[-8vw] md:left-0 bottom-27 transform-[rotate(-45deg)] z-20 w-35 md:w-50">
+                <Image 
+                    src="/uspravni_mango.png"
+                    alt="labelo mango"
+                    width={200}
+                    height={200}
+                    className="z-20"
+                />
+            </motion.div>
+            
+            <motion.div 
+                animate={{ y: [-5, 5] }}
+                transition={{ duration: 2, delay: 1, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
+                className="absolute bottom-27 z-20 w-35 md:w-50">
+                <Image 
+                    src="/uspravni_mint.png"
+                    alt="labelo mint"
+                    width={200}
+                    height={200}
+                    className="z-20"
+                />
             </motion.div>
 
             {/* Main content — tekst gore, slika dole */}

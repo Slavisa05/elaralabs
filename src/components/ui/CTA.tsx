@@ -16,7 +16,7 @@ export default function CTA() {
         >
             {/* Pozadinska slika */}
             <Image
-                src="/grupna-slika.png"
+                src="/grupna_slika.png"
                 alt="cta pozadina"
                 fill
                 className="object-cover"
