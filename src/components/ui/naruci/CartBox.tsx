@@ -6,10 +6,11 @@ import { createCheckout } from '@/lib/queries/checkout'
 import { useCart } from '@/hooks/useCart'
 import { AnimationPhase } from '@/hooks/useCartAnimation'
 import { useState } from 'react'
+import { Minus, Plus, Trash2 } from 'lucide-react'
+import Image from 'next/image'
 import HeartParticle from './HeartParticle'
 import Button from '../Button'
 import Modal from '../Modal'
-import { Minus, Plus, Trash2 } from 'lucide-react'
 
 const srca = [
   { x: -40, delay: 0 },
@@ -66,7 +67,7 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
 
         <motion.div
           ref={setNodeRef}
-          className="relative w-full max-w-100 md:max-w-140 mx-auto"
+          className="relative w-full mx-auto"
           animate={isShaking ? { x: [-6, 6, -6, 6, -4, 4, 0] } : { x: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
@@ -103,11 +104,25 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             </div>
           )}
 
-          {/* === SLOJ 10: Slika kutije === */}
+          {/* Donji deo — puna slika, iza labela */}
           <img
             src="/kutija.png"
-            alt="Elara kutija"
-            className="relative z-10 w-full h-auto select-none pointer-events-none"
+            className="absolute z-5 top-0 left-0 w-full h-auto select-none pointer-events-none"
+            draggable={false}
+          />
+
+          {/* Placeholder za visinu */}
+          <img
+            src="/kutija.png"
+            className="w-full h-auto opacity-0 pointer-events-none select-none"
+            aria-hidden
+          />
+
+          {/* Gornji deo — ista slika, ali clipovana na gornju polovinu, ispred labela */}
+          <img
+            src="/kutija.png"
+            className="absolute z-30 top-0 left-0 w-full h-auto select-none pointer-events-none"
+            style={{ clipPath: 'inset(48.5% 0 0 0)' }} 
             draggable={false}
           />
 
