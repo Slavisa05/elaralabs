@@ -13,7 +13,7 @@ const textVariants = {
 export default function HeroSection() {
     return (
         <section
-            className="relative min-h-[80vh] pt-[12vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
+            className="relative min-h-[75vh] pt-[12vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
         >
             {/* Hero slika — dole na mobilnom, centrirana na desktopu */}
             <Image
@@ -35,7 +35,7 @@ export default function HeroSection() {
             <motion.div 
                 animate={{ y: [-5, 5], rotate: 45 }}
                 transition={{ y:{ duration: 2, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }, rotate: { duration: 10 },}}
-                className="absolute left-[-8vw] md:left-0 top-35 md:top-35 transform-[rotate(45deg)] z-20 w-35 md:w-50">
+                className="absolute left-[-8vw] md:left-0 top-40 md:top-35 transform-[rotate(45deg)] z-20 w-35 md:w-50">
                 <Image 
                     src="/original_uspravni.png"
                     alt="labelo med"
@@ -47,7 +47,7 @@ export default function HeroSection() {
             <motion.div 
                 animate={{ y: [-5, 5], rotate: -45 }}
                 transition={{ y:{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }, rotate: { duration: 10, delay: 0.5 },}}
-                className="absolute right-[-8vw] md:right-0 top-35 md:top-35 transform-[rotate(-45deg)] z-20 w-35 md:w-50">
+                className="absolute right-[-8vw] md:right-0 top-40 md:top-35 transform-[rotate(-45deg)] z-20 w-35 md:w-50">
                 <Image 
                     src="/uspravna_jagoda.png"
                     alt="labelo jagoda"
