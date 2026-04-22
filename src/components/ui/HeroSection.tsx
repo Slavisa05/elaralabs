@@ -98,7 +98,7 @@ export default function HeroSection() {
                 {/* Text side */}
                 <div className="flex flex-col items-center gap-4 md:gap-6 md:flex-1">
                     <motion.h1
-                        className="text-center md:text-start text-white drop-shadow-lg text-xl md:text-5xl lg:text-6xl"
+                        className="text-center md:text-start text-white drop-shadow-lg uppercase text-3xl md:text-5xl lg:text-6xl"
                         variants={textVariants}
                         initial="hidden"
                         animate="visible"
