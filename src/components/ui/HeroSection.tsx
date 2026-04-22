@@ -22,7 +22,7 @@ export default function HeroSection() {
                 width={1400}
                 height={900}
                 priority
-                className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-full md:bottom-auto md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
+                className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-full md:bottom-auto md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
             />
 
             {/* Overlay for text contrast */}
@@ -93,7 +93,7 @@ export default function HeroSection() {
             </motion.div>
 
             {/* Main content — tekst gore, slika dole */}
-            <div className="w-full relative z-10 flex flex-col items-center justify-center gap-6 pt-10 md:flex-1 md:flex-row md:items-start md:gap-12">
+            <div className="w-full relative z-10 flex flex-col items-center justify-center gap-6 pt-9 md:flex-1 md:flex-row md:items-start md:gap-12">
 
                 {/* Text side */}
                 <div className="flex flex-col items-center gap-4 md:gap-6 md:flex-1">
