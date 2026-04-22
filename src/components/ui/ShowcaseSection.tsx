@@ -5,8 +5,8 @@ import { motion } from "motion/react"
 
 export default function ShowcaseSection() {
     return(
-        <section className="relative px-[5vw] py-25 bg-linear-to-b from-background via-background to-accent overflow-hidden">
-            <motion.h2
+        <section className="relative px-[5vw] pb-15 bg-linear-to-b from-background via-background to-accent overflow-hidden">
+            {/* <motion.h2
                 className="mb-3 text-center"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ export default function ShowcaseSection() {
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
             >
                 Pet pažljivo razvijenih ukusa — prirodni sastojci, bez kompromisa.
-            </motion.p>
+            </motion.p> */}
 
             <div className="w-full h-full flex flex-col md:flex-row items-center justify-between gap-10">
                 <motion.div
@@ -52,7 +52,7 @@ export default function ShowcaseSection() {
                 >
                     <Image 
                         src="/grupna_slika.png"
-                        alt="labelo med"
+                        alt="slika svih labela"
                         width={400}
                         height={400}
                         className="rounded-xl w-full"

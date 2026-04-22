@@ -108,8 +108,8 @@ export default function ProizvodSection() {
                             <Image
                                 src={p.cardImage}
                                 alt={p.label}
-                                width={400}
-                                height={400}
+                                fill
+                                sizes="(max-width: 768px) 100px, 160px"
                                 className="object-contain"
                             />
                         </div>
@@ -152,7 +152,7 @@ export default function ProizvodSection() {
                             alt={current.heading}
                             width={220}
                             height={220}
-                            style={{ height: "auto" }}
+                            style={{ width: "auto", height: "auto" }}
                             className="object-contain drop-shadow-xl"
                         />
                     </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useState } from "react";
 import Button from "./Button";
 
 const fieldVariants = {
@@ -9,6 +10,28 @@ const fieldVariants = {
 };
 
 export default function ContactSection() {
+    const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setStatus('loading')
+
+    const form = e.currentTarget
+    const data = {
+        ime: (form.elements.namedItem('name') as HTMLInputElement).value,
+        telefon: (form.elements.namedItem('phoneNumber') as HTMLInputElement).value,
+        poruka: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+    }
+
+    const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    })
+
+    setStatus(res.ok ? 'ok' : 'error')
+    }
+
     return(
         <section id="kontakt" className="mx-[5vw] py-25">
             <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -31,7 +54,7 @@ export default function ContactSection() {
                     whileInView="visible"
                     viewport={{ once: true }}
                 >
-                    <form className="flex flex-col gap-5">
+                    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                         {[
                             { label: "Ime i prezime", name: "name", type: "text", placeholder: "Pera Perić", tag: "input", autocomplete: "name" },
                             { label: "Broj telefona", name: "phoneNumber", type: "tel", placeholder: "+38164...", tag: "input", autocomplete: "tel" },
@@ -68,9 +91,11 @@ export default function ContactSection() {
                         <motion.div variants={fieldVariants} transition={{ duration: 0.45, ease: "easeOut", delay: 3 * 0.15 }}>
                             <Button type="submit" text="Pošalji poruku" variant="secondary" />
                         </motion.div>
+
+                        {status === 'ok' && <p className="text-green-500 text-sm">Poruka poslata!</p>}
+                        {status === 'error' && <p className="text-red-500 text-sm">Greška, pokušaj ponovo.</p>}
                     </form>
                 </motion.div>
-
             </div>
         </section>
     )

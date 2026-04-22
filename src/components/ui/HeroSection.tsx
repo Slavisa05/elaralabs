@@ -13,7 +13,7 @@ const textVariants = {
 export default function HeroSection() {
     return (
         <section
-            className="relative min-h-screen pt-[12vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
+            className="relative min-h-[70vh] pt-[12vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
         >
             {/* Hero slika — dole na mobilnom, centrirana na desktopu */}
             <Image
@@ -41,7 +41,6 @@ export default function HeroSection() {
                     alt="labelo med"
                     width={200}
                     height={200}
-                    className="w-full h-auto"
                 />
             </motion.div>
             
@@ -54,46 +53,42 @@ export default function HeroSection() {
                     alt="labelo jagoda"
                     width={200}
                     height={200}
-                    className="w-full h-auto"
                 />
             </motion.div>
             
             <motion.div 
                 animate={{ y: [-5, 5], rotate: 45 }}
                 transition={{ y:{ duration: 2, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }, rotate: { duration: 10 },}}
-                className="absolute right-[-8vw] md:right-0 bottom-27 transform-[rotate(45deg)] z-20 w-35 md:w-50">
+                className="absolute right-[-8vw] md:right-0 bottom-15 transform-[rotate(45deg)] z-20 w-35 md:w-50">
                 <Image 
                     src="/uspravna_vanilla.png"
                     alt="labelo vanila"
                     width={200}
                     height={200}
-                    className="w-full h-auto"
                 />
             </motion.div>
             
             <motion.div
                 animate={{ y: [-5, 5], rotate: -45 }}
                 transition={{ y:{ duration: 2, delay: 0.5, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }, rotate: { duration: 10, delay: 0.5 },}}
-                className="absolute left-[-8vw] md:left-0 bottom-27 transform-[rotate(-45deg)] z-20 w-35 md:w-50">
+                className="absolute left-[-8vw] md:left-0 bottom-15 transform-[rotate(-45deg)] z-20 w-35 md:w-50">
                 <Image 
                     src="/uspravni_mango.png"
                     alt="labelo mango"
                     width={200}
                     height={200}
-                    className="w-full h-auto"
                 />
             </motion.div>
             
             <motion.div 
                 animate={{ y: [-5, 5] }}
                 transition={{ duration: 2, delay: 1, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
-                className="absolute bottom-27 z-20 w-35 md:w-50">
+                className="absolute bottom-15 z-20 w-35 md:w-50">
                 <Image 
                     src="/uspravni_mint.png"
                     alt="labelo mint"
                     width={200}
                     height={200}
-                    className="w-full h-auto"
                 />
             </motion.div>
 
@@ -112,16 +107,6 @@ export default function HeroSection() {
                         Prirodno. Ukusno. Naše.
                     </motion.h1>
 
-                    <motion.p
-                        className="text-center md:text-start text-white/90 text-base md:text-lg"
-                        variants={textVariants}
-                        initial="hidden"
-                        animate="visible"
-                        transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-                    >
-                        5 unikatnih ukusa napravljenih od prirodnih sastojaka, bez veštačkih aroma i konzervansa.
-                    </motion.p>
-
                     <motion.div
                         className="flex flex-col sm:flex-row items-center gap-3 md:gap-4"
                         variants={textVariants}
@@ -138,7 +123,7 @@ export default function HeroSection() {
 
             {/* Scroll bounce arrow */}
             <motion.div
-                className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-white/60"
+                className="absolute bottom-15 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-white/60"
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
             >
