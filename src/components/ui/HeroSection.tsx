@@ -22,7 +22,7 @@ export default function HeroSection() {
                 width={1400}
                 height={900}
                 priority
-                className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-full md:bottom-auto md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
+                className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-full md:bottom-auto md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
             />
 
             {/* Overlay for text contrast */}
@@ -96,7 +96,7 @@ export default function HeroSection() {
             <div className="w-full relative z-10 flex flex-col items-center justify-center gap-6 pt-9 md:flex-1 md:flex-row md:items-start md:gap-12">
 
                 {/* Text side */}
-                <div className="flex flex-col items-center gap-4 md:gap-6 md:flex-1">
+                <div className="flex flex-col items-center gap-8 md:gap-6 md:flex-1">
                     <motion.h1
                         className="text-center md:text-start text-white drop-shadow-lg uppercase text-3xl md:text-5xl lg:text-6xl"
                         variants={textVariants}
