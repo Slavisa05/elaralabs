@@ -13,7 +13,7 @@ const textVariants = {
 export default function HeroSection() {
     return (
         <section
-            className="relative min-h-[80vh] pt-[12vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
+            className="relative min-h-[85vh] pt-[12vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
         >
             {/* Hero slika — dole na mobilnom, centrirana na desktopu */}
             <Image
