@@ -39,7 +39,7 @@ export default function ShowcaseSection() {
                         alt="slika kutije"
                         width={600}
                         height={600}
-                        className="rounded-xl w-70 md:w-90"
+                        className="mt-5 rounded-xl w-70 md:w-90"
                     />
                 </motion.div>
 

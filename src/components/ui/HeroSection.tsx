@@ -22,7 +22,7 @@ export default function HeroSection() {
                 width={1400}
                 height={900}
                 priority
-                className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-full md:bottom-auto md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
+                className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full md:bottom-auto md:w-[70%] h-auto object-contain pointer-events-none select-none z-0"
             />
 
             {/* Overlay for text contrast */}
