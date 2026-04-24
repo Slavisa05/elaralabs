@@ -79,18 +79,6 @@ export default function HeroSection() {
                     height={200}
                 />
             </motion.div>
-            
-            <motion.div 
-                animate={{ y: [-5, 5] }}
-                transition={{ duration: 2, delay: 1, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
-                className="absolute bottom-15 z-20 w-35 md:w-50">
-                <Image 
-                    src="/uspravni_mint.png"
-                    alt="labelo mint"
-                    width={200}
-                    height={200}
-                />
-            </motion.div>
 
             {/* Main content — tekst gore, slika dole */}
             <div className="w-full relative z-10 flex flex-col items-center justify-center gap-6 pt-9 md:flex-1 md:flex-row md:items-start md:gap-12">

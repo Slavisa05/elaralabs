@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image"
 import { motion } from "motion/react"
+import Link from "next/link";
+import Image from "next/image"
 
 export default function ShowcaseSection() {
     return(
@@ -34,13 +35,15 @@ export default function ShowcaseSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
                 >
-                    <Image 
-                        src="/kutija.png"
-                        alt="slika kutije"
-                        width={600}
-                        height={600}
-                        className="mt-5 rounded-xl w-70 md:w-90"
-                    />
+                    <Link href="/naruci">
+                        <Image 
+                            src="/kutija.png"
+                            alt="slika kutije"
+                            width={600}
+                            height={600}
+                            className="mt-5 rounded-xl w-70 md:w-90"
+                        />
+                    </Link>
                 </motion.div>
 
                 <motion.div

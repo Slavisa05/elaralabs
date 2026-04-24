@@ -23,8 +23,8 @@ export default function ZastoMiSection() {
     return (
         <section id="zasto-mi" className="overflow-hidden pb-20">
 
-            {/* Scrolling ticker strip */}
-            <div className="bg-foreground text-background py-3 overflow-hidden">
+            {/* Crni horizontal bar */}
+            {/* <div className="bg-foreground text-background py-3 overflow-hidden">
                 <motion.div
                     className="flex gap-12 whitespace-nowrap"
                     style={{ width: "max-content" }}
@@ -35,7 +35,7 @@ export default function ZastoMiSection() {
                         <span key={i} className="uppercase font-bold text-sm tracking-widest">{item}</span>
                     ))}
                 </motion.div>
-            </div>
+            </div> */}
 
             {/* Main content */}
             <div className="mx-[5vw] py-16 flex flex-col gap-12">

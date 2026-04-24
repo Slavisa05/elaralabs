@@ -19,9 +19,9 @@ export default function Home() {
         <ShowcaseSection />
         <ProizvodSection />
         <ZastoMiSection />
-        <TestimonialSection />
+        {/* <TestimonialSection /> */}
         <ContactSection />
-        <CTA />
+        {/* <CTA /> */}
     </main>
   );
 }

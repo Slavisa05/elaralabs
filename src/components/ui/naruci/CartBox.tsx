@@ -146,8 +146,8 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
 
           {/* Prazna kutija tekst */}
           {flatItems.length === 0 && (
-            <div className="absolute z-20 top-[30%] left-[25%] right-[25%] flex items-center justify-center">
-              <p className="text-white/60 text-xs md:text-sm text-center select-none drop-shadow-md">
+            <div className="absolute z-20 top-[20%] left-[25%] right-[25%] flex items-center justify-center">
+              <p className="text-black bold text-sm md:text-xl text-center select-none drop-shadow-md">
                 Prevuci labelu ovde
               </p>
             </div>
@@ -277,8 +277,13 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             <p className="text-sm font-semibold text-center">
               Ukupno: {totalPrice} RSD
             </p>
+            {flatItems.length < 3 && (
+              <p className="text-red-500 text-xs text-center">
+                Morate dodati najmanje 3 proizvoda u korpu da biste mogli da naručite.
+              </p>
+            )}
             <Button text='pogledaj korpu' variant='secondary' onClick={() => setIsPregledOpen(true)} />
-            <Button text='naruci' onClick={handleCheckout} />
+            <Button text='naruci' onClick={handleCheckout} disabled={flatItems.length < 3} />
           </motion.div>
         )}
       </AnimatePresence>
