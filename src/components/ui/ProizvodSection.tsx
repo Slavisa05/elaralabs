@@ -8,12 +8,11 @@ import Button from "./Button";
 const proizvodi = [
     {
         slug: "original",
-        label: "Med",
+        label: "Original",
         bg: "bg-amber-300",
-        heading: "Med",
+        heading: "Original",
         paragraphs: [
-            "Topao i bogat — ukus meda koji vas vraća u djetinjstvo. Svaki zalogaj donosi prirodnu slatkoću planinskog meda, pažljivo odabranog od lokalnih pčelara.",
-            "Mekan, aromatičan i neodoljivo privlačan. Savršen za one koji traže prirodnu slatkoću bez kompromisa.",
+            "sa prirodnim blagim mirisom meda iz pčelinjeg voska za autentičnu negu.",
         ],
         imageUrl: "/original.png",
         cardImage: "/original_uspravni.png",
@@ -24,8 +23,7 @@ const proizvodi = [
         bg: "bg-orange-300",
         heading: "Mango",
         paragraphs: [
-            "Egzotičan i sunčan — ukus manga koji vas odmah prenosi na tropsku plažu. Koristimo zrele, sočne mango plodove.",
-            "Voćan, živahan i osvježavajući. Idealan za tople dane i one koji vole egzotične ukuse.",
+            "egzotična, topla nota manga sa diskretnom slatkoćom koja unosi osećaj leta i nežne nege.",
         ],
         imageUrl: "/mango.png",
         cardImage: "/uspravni_mango.png",
@@ -36,8 +34,7 @@ const proizvodi = [
         bg: "bg-yellow-200",
         heading: "Vanila",
         paragraphs: [
-            "Klasičan i neodoljiv — ukus vanile koji nikad ne izlazi iz mode. Koristimo pravu bourbon vanilu.",
-            "Blag, ali kompleksan. Savršen za one koji cene jednostavnost i kvalitet sirovine.",
+            "nežna, kremasta aroma vanile koja umiruje i pruža topao, prijatan osećaj tokom dana.",
         ],
         imageUrl: "/vanilla.png",
         cardImage: "/uspravna_vanilla.png",
@@ -48,8 +45,7 @@ const proizvodi = [
         bg: "bg-emerald-300",
         heading: "Mint",
         paragraphs: [
-            "Svjež i hladan — ukus mente koji budi osjetila. Prirodna menta daje intenzivan, čist i osvježavajući osjećaj.",
-            "Savršen balans između osvježenja i slatkoće. Za one koji vole čist, mentolni ukus.",
+            "osvežavajuća nota mente koja blago hladi usne, daje osećaj čistoće i svežine.",
         ],
         imageUrl: "/mint.png",
         cardImage: "/uspravni_mint.png",
@@ -60,8 +56,7 @@ const proizvodi = [
         bg: "bg-red-400",
         heading: "Jagoda",
         paragraphs: [
-            "Letnji klasik u svakom zalogaju. Ukus jagode donosi sećanje na sunčane popodne i zrele jagode iz bašte.",
-            "Napravljen bez veštačkih boja i aroma — priroda sama po sebi pruža dovoljno.",
+            " sveža i sočna aroma jagode koja daje blagu slatkoću i prijatan voćni osećaj na usnama.",
         ],
         imageUrl: "/jagoda.png",
         cardImage: "/uspravna_jagoda.png",

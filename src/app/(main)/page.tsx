@@ -8,8 +8,8 @@ import ContactSection from "@/components/ui/ContactSection";
 import CTA from "@/components/ui/CTA";
 
 export const metadata: Metadata = {
-  title: "Dariov sajt",
-  description: "Prodavnica za labelo",
+  title: "Elara | Prirodna Ručno Rađena Labela",
+  description: "Elara labelo — prirodna, ručno rađena labela bez konzervansa. 5 ukusa: med, mango, vanila, mint, jagoda.",
 };
 
 export default function Home() {

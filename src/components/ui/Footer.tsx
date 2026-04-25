@@ -27,21 +27,17 @@ export default function Footer() {
                 <div className="flex gap-10">
                     <div className="flex flex-col gap-4">
                         <strong>kontakt</strong>
-                        <Link href="mailto:sajt@gmail.com" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                        <Link href="mailto:elarabusiness.rs@gmail.com" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
                             <Mail size={16} />
-                            sajt@gmail.com
-                        </Link>
-                        <Link href="tel:+381123456789" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
-                            <Phone size={16} />
-                            +381123456789
+                            elarabusiness.rs@gmail.com
                         </Link>
                     </div>
 
                     <div className="flex flex-col gap-4">
                         <strong>društvene mreže</strong>
-                        <Link href="https://instagram.com/riosty1e" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                        <Link href="https://instagram.com/elara.labs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
                             <InstagramIcon size={16} />
-                            @riosty1e
+                            @elara.labs
                         </Link>
                     </div>
                 </div>
