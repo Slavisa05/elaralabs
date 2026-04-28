@@ -24,7 +24,7 @@ export default function Footer() {
                     </Link>
                 </div>
 
-                <div className="flex gap-10">
+                <div className="flex flex-col md:flex-row gap-10">
                     <div className="flex flex-col gap-4">
                         <strong>kontakt</strong>
                         <Link href="mailto:elarabusiness.rs@gmail.com" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
