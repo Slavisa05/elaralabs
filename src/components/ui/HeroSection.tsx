@@ -92,7 +92,7 @@ export default function HeroSection() {
                         animate="visible"
                         transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
                     >
-                        Prirodno Labelo
+                        Prirodni Balzam Za Usne
                     </motion.h1>
 
                     <motion.div

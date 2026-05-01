@@ -47,12 +47,12 @@ export default function ZastoMiSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7 }}
                         viewport={{ once: true }}
-                        className="ml-[-5vw]"
+                        className="mr-[-5vw]"
                         whileHover={{ scale: 1.03 }}
                     >
                         <Image
-                            src="/wa-img.png"
-                            alt="3 Elara proizvoda"
+                            src="/vizuall.png"
+                            alt="vizual proizvoda"
                             width={600}
                             height={600}
                             style={{ height: "auto" }}
@@ -68,7 +68,7 @@ export default function ZastoMiSection() {
                             transition={{ duration: 0.5 }}
                             viewport={{ once: true }}
                         >
-                            Zašto naše labelo?
+                            Zašto naš balzam za usne?
                         </motion.h2>
 
                         {/* Benefit cards 2×2 */}
