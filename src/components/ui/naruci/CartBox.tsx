@@ -63,6 +63,7 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
     <div className="flex flex-col h-full gap-4">
 
       <div className="flex-1 flex flex-col items-center justify-center">
+        <span className="text-foreground/70">* Besplatna dostava na poručenih 5 ili više proizvoda</span>
 
         <motion.div
           ref={setNodeRef}
@@ -284,7 +285,6 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             )}
             <Button text='pogledaj korpu' variant='secondary' onClick={() => setIsPregledOpen(true)} />
             <Button text='naruci' onClick={handleCheckout} disabled={flatItems.length < 3} />
-            <span className="">* Besplatna dostava na poručenih 5 ili više proizvoda</span>
           </motion.div>
         )}
       </AnimatePresence>
