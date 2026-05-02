@@ -284,6 +284,7 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             )}
             <Button text='pogledaj korpu' variant='secondary' onClick={() => setIsPregledOpen(true)} />
             <Button text='naruci' onClick={handleCheckout} disabled={flatItems.length < 3} />
+            <span className="">* Besplatna dostava na poručenih 5 ili više proizvoda</span>
           </motion.div>
         )}
       </AnimatePresence>
