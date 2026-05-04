@@ -44,7 +44,7 @@ export default function Footer() {
             </div>
 
             <div className="w-full border-t-2 pt-10">
-                <p className="text-center">© {new Date().getFullYear()} sajt. Sva prava zadržana.</p>
+                <p className="text-center">© {new Date().getFullYear()} elaralabs. Sva prava zadržana.</p>
             </div>
         </footer>
     )
