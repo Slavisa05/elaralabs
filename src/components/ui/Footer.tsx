@@ -35,9 +35,9 @@ export default function Footer() {
 
                     <div className="flex flex-col gap-4">
                         <strong>društvene mreže</strong>
-                        <Link href="https://instagram.com/elara.labs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
+                        <Link href="https://instagram.com/elaralabs.rs" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
                             <InstagramIcon size={16} />
-                            @elara.labs
+                            @elaralabs.rs
                         </Link>
                     </div>
                 </div>
