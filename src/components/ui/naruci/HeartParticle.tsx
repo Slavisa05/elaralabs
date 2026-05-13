@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 interface HeartParticleProps {
@@ -8,6 +9,12 @@ interface HeartParticleProps {
 }
 
 export default function HeartParticle({ x, delay }: HeartParticleProps) {
+  const [driftX, setDriftX] = useState(x)
+
+  useEffect(() => {
+    setDriftX(x + (Math.random() * 30 - 15))
+  }, [x])
+
   return (
     <motion.div
       className="absolute text-red-500 text-xl pointer-events-none select-none"
@@ -21,7 +28,7 @@ export default function HeartParticle({ x, delay }: HeartParticleProps) {
       animate={{
         opacity: 0,
         y: -80,
-        x: x + (Math.random() * 30 - 15),
+        x: driftX,
         scale: 1.2,
       }}
       transition={{

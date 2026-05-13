@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useReducer, useEffect } from 'react'
+import { createContext, useReducer, useEffect } from 'react'
 import type { CartState, CartAction, ProductVariant, CartItem } from '@/types/cart'
 
 const MAX_ITEMS = 50
@@ -94,16 +94,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   // Učitaj iz localStorage pri prvom renderu
   useEffect(() => {
-    const saved = localStorage.getItem('cart')
-    if (saved) {
-      const parsed: CartItem[] = JSON.parse(saved)
-      dispatch({ type: 'HYDRATE_CART', payload: parsed })
+    try {
+      const saved = localStorage.getItem('cart')
+      if (saved) {
+        const parsed: CartItem[] = JSON.parse(saved)
+        dispatch({ type: 'HYDRATE_CART', payload: parsed })
+      }
+    } catch (error) {
+      console.warn('Cart hydrate failed:', error)
     }
   }, [])
 
   // Sačuvaj u localStorage svaki put kad se items promeni
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state.items))
+    try {
+      localStorage.setItem('cart', JSON.stringify(state.items))
+    } catch (error) {
+      console.warn('Cart persist failed:', error)
+    }
   }, [state.items])
 
   // Izračunaj ukupno

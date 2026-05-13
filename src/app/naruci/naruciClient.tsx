@@ -6,17 +6,11 @@ import { ArrowLeft } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/hooks/useCart'
 import { useCartAnimation } from '@/hooks/useCartAnimation'
-import { getProducts } from '@/lib/queries/products'
-import type { Metadata } from "next"
+import type { ProductVariant } from '@/types/cart'
 import Link from 'next/link'
 import Draggable from '@/components/ui/naruci/Draggable'
 import CartBox from '@/components/ui/naruci/CartBox'
 import LabeloParticles from '@/components/ui/naruci/LabeloParticles'
-
-export const metadata: Metadata = {
-  title: "Naruči | Elara Prirodna Labela",
-  description: "Naruči Elara prirodnu labelu online. Brza isporuka širom Srbije.",
-}
 
 interface FlyingItem {
   image: string
@@ -26,10 +20,11 @@ interface FlyingItem {
   toY: number
 }
 
-const proizvodi = await getProducts()
+interface NaruciClientProps {
+  proizvodi: ProductVariant[]
+}
 
-
-export default function NaruciClient() {
+export default function NaruciClient({ proizvodi }: NaruciClientProps) {
   const { addItem } = useCart()
   const { phase, playAnimation } = useCartAnimation()
   const [activeId, setActiveId] = useState<string | null>(null)
