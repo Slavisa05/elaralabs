@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { DndContext, DragEndEvent, DragStartEvent, DragOverlay } from '@dnd-kit/core'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Gift } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/hooks/useCart'
 import { useCartAnimation } from '@/hooks/useCartAnimation'
@@ -11,6 +11,7 @@ import Link from 'next/link'
 import Draggable from '@/components/ui/naruci/Draggable'
 import CartBox from '@/components/ui/naruci/CartBox'
 import LabeloParticles from '@/components/ui/naruci/LabeloParticles'
+import Modal from '@/components/ui/Modal'
 
 interface FlyingItem {
   image: string
@@ -30,7 +31,21 @@ export default function NaruciClient({ proizvodi }: NaruciClientProps) {
   const [activeId, setActiveId] = useState<string | null>(null)
   const [flyingItem, setFlyingItem] = useState<FlyingItem | null>(null)
   const [enteringImage, setEnteringImage] = useState<string | undefined>(undefined)
+  const [showTutorial, setShowTutorial] = useState(true)
   const lidRef = useRef<HTMLDivElement>(null)
+
+  // useEffect(() => {
+  //   // Prikaži tutorial samo prvi put kada korisnik poseti stranicu
+  //   const hasSeenTutorial = sessionStorage.getItem('naruci-tutorial-seen')
+  //   if (hasSeenTutorial) {
+  //     setShowTutorial(false)
+  //   }
+  // }, [])
+
+  const closeTutorial = () => {
+    setShowTutorial(false)
+    sessionStorage.setItem('naruci-tutorial-seen', 'true')
+  }
 
   const activeProizvod = proizvodi.find(p => p.id === activeId)
 
@@ -76,6 +91,46 @@ export default function NaruciClient({ proizvodi }: NaruciClientProps) {
 
   return (
     <main className="bg-background relative px-[5vw] pt-10 flex flex-col gap-10">
+      {/* Tutorial Modal */}
+      <Modal
+        isOpen={showTutorial}
+        title="Kako Naručiti?"
+        onClose={closeTutorial}
+      >
+        <div className="flex flex-col gap-4">
+          <div className="flex items-start gap-3">
+            <div className="shrink-0 text-2xl">1️⃣</div>
+            <div>
+              <p className="font-semibold text-sm mb-1">Odaberi Proizvod</p>
+              <p className="text-sm text-foreground/70">Klikni na proizvod koji te zanima sa desne strane.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start gap-3">
+            <div className="shrink-0 text-2xl">👆</div>
+            <div>
+              <p className="font-semibold text-sm mb-1">Prevuci u Korpu</p>
+              <p className="text-sm text-foreground/70">Drži proizvod i prevuci ga u kutiju sa leve strane.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start gap-3">
+            <div className="shrink-0 text-2xl">✅</div>
+            <div>
+              <p className="font-semibold text-sm mb-1">Završi Narudžbu</p>
+              <p className="text-sm text-foreground/70">Kada dodaš sve što želiš, nastavi ka plaćanju.</p>
+            </div>
+          </div>
+
+          <button
+            onClick={closeTutorial}
+            className="w-full mt-4 py-3 bg-foreground text-background font-semibold rounded-lg hover:bg-foreground/90 transition-colors duration-150"
+          >
+            Razumeo, Počnimo!
+          </button>
+        </div>
+      </Modal>
+      
       <LabeloParticles />
       <Link href="/" className="absolute top-5 left-2.5 flex items-center gap-4">
         <ArrowLeft size={32} />

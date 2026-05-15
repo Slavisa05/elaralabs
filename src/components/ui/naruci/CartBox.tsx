@@ -6,7 +6,7 @@ import { createCheckout } from '@/lib/queries/checkout'
 import { useCart } from '@/hooks/useCart'
 import { AnimationPhase } from '@/hooks/useCartAnimation'
 import { useState } from 'react'
-import { Minus, Plus, Trash2 } from 'lucide-react'
+import { Minus, Plus, Trash2, Send } from 'lucide-react'
 import HeartParticle from './HeartParticle'
 import Button from '../Button'
 import Modal from '../Modal'
@@ -30,13 +30,26 @@ interface CartBoxProps {
 
 export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) {
   const [isPregledOpen, setIsPregledOpen] = useState(false)
+  const [isSending, setIsSending] = useState(false)
+  const [showBurstHearts, setShowBurstHearts] = useState(false)
 
   const { setNodeRef, isOver } = useDroppable({ id: 'korpa' })
   const { items, totalPrice, updateQuantity, removeItem } = useCart()
 
   async function handleCheckout() {
-    const url = await createCheckout(items)
-    window.location.href = url
+    setIsSending(true)
+    setShowBurstHearts(true)
+    
+    // Burst animacija traje ~800ms
+    setTimeout(() => {
+      setShowBurstHearts(false)
+    }, 800)
+    
+    // Kasni malo da korisnik vidi animaciju
+    setTimeout(async () => {
+      const url = await createCheckout(items)
+      window.location.href = url
+    }, 1000)
   }
 
   const isShaking = phase === 'shake'
@@ -68,8 +81,8 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
         <motion.div
           ref={setNodeRef}
           className="relative w-full mx-auto"
-          animate={isShaking ? { x: [-6, 6, -6, 6, -4, 4, 0] } : { x: 0 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          animate={isSending ? { scale: 0.95, opacity: 0.8 } : (isShaking ? { x: [-6, 6, -6, 6, -4, 4, 0] } : { x: 0 })}
+          transition={isSending ? { duration: 0.3 } : { duration: 0.5, ease: 'easeInOut' }}
         >
 
           {/* === SLOJ 0: Skrivene labele IZA kutije === */}
@@ -262,6 +275,31 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             </AnimatePresence>
           </div>
 
+          {/* === BURST SRCA — pri slanju === */}
+          <div className="absolute z-35 top-1/2 left-1/2 pointer-events-none">
+            <AnimatePresence>
+              {showBurstHearts && Array.from({ length: 12 }).map((_, i) => {
+                const angle = (i / 12) * Math.PI * 2
+                const distance = 150
+                const x = Math.cos(angle) * distance
+                const y = Math.sin(angle) * distance
+                
+                return (
+                  <motion.div
+                    key={`burst-${i}`}
+                    className="absolute text-2xl"
+                    initial={{ x: 0, y: 0, scale: 0, opacity: 1 }}
+                    animate={{ x, y, scale: 1.2, opacity: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.8, ease: 'easeOut' }}
+                  >
+                    ❤️
+                  </motion.div>
+                )
+              })}
+            </AnimatePresence>
+          </div>
+
         </motion.div>
       </div>
 
@@ -284,7 +322,47 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
               </p>
             )}
             <Button text='pogledaj korpu' variant='secondary' onClick={() => setIsPregledOpen(true)} />
-            <Button text='naruci' onClick={handleCheckout} disabled={flatItems.length < 3} />
+            
+            {/* Animirano dugme za slanje */}
+            <motion.button
+              onClick={handleCheckout}
+              disabled={flatItems.length < 3 || isSending}
+              className="relative w-full py-3 bg-foreground text-background font-semibold rounded-lg hover:bg-foreground/90 transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
+              whileHover={flatItems.length >= 3 && !isSending ? { scale: 1.05 } : {}}
+              whileTap={flatItems.length >= 3 && !isSending ? { scale: 0.95 } : {}}
+            >
+              <motion.div
+                className="flex items-center justify-center gap-2"
+                initial={{ opacity: 1 }}
+                animate={isSending ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isSending ? null : (
+                  <>
+                    <Send size={18} />
+                    <span>Pošalji Narudžbu</span>
+                  </>
+                )}
+              </motion.div>
+              
+              {/* Loading spinner pri slanju */}
+              <AnimatePresence>
+                {isSending && (
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <motion.div
+                      className="w-5 h-5 border-3 border-background/30 border-t-background rounded-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
