@@ -51,7 +51,7 @@ export default function ShowcaseSection() {
 
                         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                             <Link href="/naruci" className="inline-flex">
-                                <Button text="Idi na naruči" />
+                                <Button text="naruči odmah" />
                             </Link>
                         </div>
                     </div>
