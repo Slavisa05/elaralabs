@@ -126,7 +126,7 @@ export default function NaruciClient({ proizvodi }: NaruciClientProps) {
             onClick={closeTutorial}
             className="w-full mt-4 py-3 bg-foreground text-background font-semibold rounded-lg hover:bg-foreground/90 transition-colors duration-150"
           >
-            Razumeo, Počnimo!
+            U redu, Počnimo!
           </button>
         </div>
       </Modal>

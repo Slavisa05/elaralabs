@@ -162,7 +162,7 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
           {flatItems.length === 0 && (
             <div className="absolute z-20 top-[20%] left-[25%] right-[25%] flex items-center justify-center">
               <p className="text-black bold text-sm md:text-xl text-center select-none drop-shadow-md">
-                Prevuci labelu ovde
+                Prevuci balzam ovde
               </p>
             </div>
           )}
@@ -340,7 +340,7 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
                 {isSending ? null : (
                   <>
                     <Send size={18} />
-                    <span>Pošalji Narudžbu</span>
+                    <span>Nastavi na plaćanje</span>
                   </>
                 )}
               </motion.div>
