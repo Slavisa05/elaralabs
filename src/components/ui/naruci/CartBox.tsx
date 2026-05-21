@@ -316,9 +316,9 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             <p className="text-sm font-semibold text-center">
               Ukupno: {totalPrice} RSD
             </p>
-            {flatItems.length < 3 && (
+            {flatItems.length < 2 && (
               <p className="text-red-500 text-xs text-center">
-                Morate dodati najmanje 3 proizvoda u korpu da biste mogli da naručite.
+                Morate dodati najmanje 2 proizvoda u korpu da biste mogli da naručite.
               </p>
             )}
             <Button text='pogledaj korpu' variant='secondary' onClick={() => setIsPregledOpen(true)} />
@@ -326,10 +326,10 @@ export default function CartBox({ phase, lidRef, enteringImage }: CartBoxProps) 
             {/* Animirano dugme za slanje */}
             <motion.button
               onClick={handleCheckout}
-              disabled={flatItems.length < 3 || isSending}
+              disabled={flatItems.length < 2 || isSending}
               className="relative w-full py-3 bg-foreground text-background font-semibold rounded-lg hover:bg-foreground/90 transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
-              whileHover={flatItems.length >= 3 && !isSending ? { scale: 1.05 } : {}}
-              whileTap={flatItems.length >= 3 && !isSending ? { scale: 0.95 } : {}}
+              whileHover={flatItems.length >= 2 && !isSending ? { scale: 1.05 } : {}}
+              whileTap={flatItems.length >= 2 && !isSending ? { scale: 0.95 } : {}}
             >
               <motion.div
                 className="flex items-center justify-center gap-2"
