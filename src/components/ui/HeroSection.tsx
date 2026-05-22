@@ -1,10 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 const textVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -12,21 +11,6 @@ const textVariants = {
 };
 
 export default function HeroSection() {
-    const [showInfoCard, setShowInfoCard] = useState(false);
-
-    useEffect(() => {
-        const storageKey = "elara-order-info-last-seen";
-        const lastSeenRaw = localStorage.getItem(storageKey);
-        const lastSeenTime = lastSeenRaw ? Number(lastSeenRaw) : NaN;
-        const twentyFourHours = 24 * 60 * 60 * 1000;
-        const shouldShow = Number.isNaN(lastSeenTime) || Date.now() - lastSeenTime >= twentyFourHours;
-
-        if (shouldShow) {
-            setShowInfoCard(true);
-            localStorage.setItem(storageKey, String(Date.now()));
-        }
-    }, []);
-
     return (
         <section
             className="relative min-h-[85vh] pt-[12vh] pb-0 px-[5vw] flex flex-col items-center overflow-hidden bg-accent"
@@ -135,45 +119,6 @@ export default function HeroSection() {
                     <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             </motion.div>
-
-            <AnimatePresence>
-                {showInfoCard && (
-                    <motion.aside
-                        initial={{ opacity: 0, y: 24, scale: 0.98 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 12, scale: 0.98 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                        className="fixed bottom-4 right-4 left-4 sm:left-auto sm:max-w-sm z-40 rounded-2xl border border-white/30 bg-white/95 p-4 shadow-xl backdrop-blur text-foreground"
-                        aria-live="polite"
-                    >
-                        <div className="flex items-start gap-3">
-                            <div className="mt-0.5 h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />
-
-                            <div className="flex-1">
-                                <p className="text-sm font-semibold uppercase tracking-wide text-foreground/80">
-                                    Pre poručivanja
-                                </p>
-                                <ul className="mt-2 space-y-1 text-sm leading-relaxed text-foreground/85">
-                                    <li>Minimum je 2 proizvoda za porudžbinu.</li>
-                                    <li>Preporučeno je 3 proizvoda.</li>
-                                    <li>Besplatna dostava na 5+ proizvoda.</li>
-                                </ul>
-                            </div>
-
-                            <button
-                                type="button"
-                                onClick={() => setShowInfoCard(false)}
-                                className="rounded-md p-1 text-foreground/60 transition hover:bg-black/5 hover:text-foreground"
-                                aria-label="Zatvori obaveštenje"
-                            >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                </svg>
-                            </button>
-                        </div>
-                    </motion.aside>
-                )}
-            </AnimatePresence>
         </section>
     );
 }
